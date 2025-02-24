@@ -1,0 +1,16 @@
+$azero_app_search $mol_page
+	title \Поиск
+	body /
+		<= Search_row $mol_row sub /
+			<= Search $mol_search
+				hint \ Type property, elements, classes
+				query? <=> search? \antiferromagnet
+				suggests <= suggests /
+			<= Search_button $mol_button_major
+				title \Искать
+				click? <=> fetch_search? null
+		<= Row_cards $mol_list rows <= card_list /
+			<= Card*0 $mol_view sub /
+				<= Image* $mol_image
+					uri <= get_image* \
+				<= Classes* $mol_text text <= get_classes* \

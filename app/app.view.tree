@@ -1,0 +1,5 @@
+$azero_app $mol_book2_catalog
+	menu_title \−273.15°C
+	param \p
+	spreads *
+		search <= Search_page $azero_app_search

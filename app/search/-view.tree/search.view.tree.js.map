@@ -1,0 +1,10 @@
+{
+	"version": 3,
+	"sources": [
+		"azero/app/search/search.view.tree"
+	],
+	"sourcesContent": [
+		"$azero_app_search $mol_page\n\ttitle \\Поиск\n\tbody /\n\t\t<= Search_row $mol_row sub /\n\t\t\t<= Search $mol_search\n\t\t\t\thint \\ Type property, elements, classes\n\t\t\t\tquery? <=> search? \\antiferromagnet\n\t\t\t\tsuggests <= suggests /\n\t\t\t<= Search_button $mol_button_major\n\t\t\t\ttitle \\Искать\n\t\t\t\tclick? <=> fetch_search? null\n\t\t<= Row_cards $mol_list rows <= card_list /\n\t\t\t<= Card*0 $mol_view sub /\n\t\t\t\t<= Image* $mol_image\n\t\t\t\t\turi <= get_image* \\\n\t\t\t\t<= Classes* $mol_text text <= get_classes* \\\n"
+	],
+	"mappings": "AAAA,AAAA,iDAAkB,sBAAlB;AAAA,AAMe;AAAA,AAAA;AAAA,UAAS,iBAAT;AAAA;AACC;AAAA,AAAA,UAAS,EAAT;AAAA;AAHV;AAAA,AAAO,uCAAP;AACF,uBAAM,mCAAN,CADE;AAEF,4BAAO,KAAI,aAAJ,CAAP,CAFE;AAGF,2BAAS,KAAG,WAAH,CAAT,CAHE;AAAA,UAAO,GAAP;AAAA;AAMS;AAAA,AAAA;AAAA,UAAc,IAAd;AAAA;AAFT;AAAA,AAAc,6CAAd;AACF,wBAAO,QAAP,CADE;AAEF,4BAAO,KAAI,mBAAJ,CAAP,CAFE;AAAA,UAAc,GAAd;AAAA;AALD;AAAA,AAAW,oCAAX;AAAoB,sBAAI,CAC1B,KAAG,SAAH,CAD0B,EAK1B,KAAG,gBAAH,CAL0B,CAAJ,CAApB;AAAA,UAAW,GAAX;AAAA;AAWO;AAAA,AAAA,UAAY,EAAZ;AAAA;AADL;AAAA,AAAO,sCAAP;AACF,sBAAI,KAAG,cAAH,CAAJ,CADE;AAAA,UAAO,GAAP;AAAA;AAE2B;AAAA,AAAA,UAAc,EAAd;AAAA;AAA3B;AAAA,AAAS,qCAAT;AAAmB,uBAAK,KAAG,gBAAH,CAAL,CAAnB;AAAA,UAAS,GAAT;AAAA;AAHD;AAAA,AAAO,qCAAP;AAAiB,sBAAI,CACvB,KAAG,UAAH,CADuB,EAGvB,KAAG,YAAH,CAHuB,CAAJ,CAAjB;AAAA,UAAO,GAAP;AAAA;AAD2B;AAAA,AAAA,UAAU,CACxC,KAAG,UAAH,CADwC,CAAV;AAAA;AAA5B;AAAA,AAAU,qCAAV;AAAoB,uBAAK,KAAG,YAAH,CAAL,CAApB;AAAA,UAAU,GAAV;AAAA;AAVJ;AAAA,AAAA,UAAO,OAAP;AAAA;AACA;AAAA,AAAA,UAAK,CACJ,KAAG,aAAH,CADI,EASJ,KAAG,YAAH,CATI,CAAL;AAAA;AAFD,CAAA;AAMe,YANf,CAMe,yCANf;AAIM,YAJN,CAIM,yCAJN;AAUe,YAVf,CAUe,+CAVf;AAQM,YARN,CAQM,gDARN;AAGK,YAHL,CAGK,6CAHL;AAaO,gBAbP,CAaO,wCAbP;AAeO,gBAfP,CAeO,0CAfP;AAYM,gBAZN,CAYM,uCAZN;AAWK,YAXL,CAWK,4CAXL;"
+}
