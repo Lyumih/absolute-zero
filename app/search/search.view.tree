@@ -10,7 +10,7 @@ $azero_app_search $mol_page
 				title \Искать
 				click? <=> fetch_search? null
 		<= Row_cards $mol_list rows <= card_list /
-			<= Card*0 $mol_view sub /
+			<= Card*0 $mol_list rows /
 				<= Image* $mol_image
 					uri <= get_image* \
 				<= Classes* $mol_text text <= get_classes* \

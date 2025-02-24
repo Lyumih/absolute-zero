@@ -3,7 +3,7 @@ namespace $.$$ {
 	export class $azero_app_search extends $.$azero_app_search {
 		
 		dumb_query() {
-			return '{"classes":"ab initio literature","elements":"Ge-K"}'
+			return '{"elements":"Ge-K"}'
 		}
 
         fetch_refinement(next?: any) {
@@ -52,7 +52,9 @@ namespace $.$$ {
 		}
 
 		get_image( id: any ): string {
-			return `https://mpds.io/pd_thumbs/${this.fetch_facet()?.out?.[id]?.[0]}.png`
+			const image_name = this.fetch_facet()?.out?.[ id ]?.[ 0 ]
+			const category = image_name.startsWith( 'C' ) ? 'pd': 'rd'
+			return `https://mpds.io/${category}_thumbs/${image_name}.png`
 		}
 
 
