@@ -9722,8 +9722,8 @@ var $;
 			return obj;
 		}
 		Card(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Image(id)), (this.Classes(id))]);
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([(this.Image(id)), (this.Classes(id))]);
 			return obj;
 		}
 		card_list(){
@@ -9763,7 +9763,7 @@ var $;
     (function ($$) {
         class $azero_app_search extends $.$azero_app_search {
             dumb_query() {
-                return '{"classes":"ab initio literature","elements":"Ge-K"}';
+                return '{"elements":"Ge-K"}';
             }
             fetch_refinement(next) {
                 const query = this.dumb_query();
@@ -9803,7 +9803,9 @@ var $;
                 return this.fetch_facet()?.out?.[id]?.[1];
             }
             get_image(id) {
-                return `https://mpds.io/pd_thumbs/${this.fetch_facet()?.out?.[id]?.[0]}.png`;
+                const image_name = this.fetch_facet()?.out?.[id]?.[0];
+                const category = image_name.startsWith('C') ? 'pd' : 'rd';
+                return `https://mpds.io/${category}_thumbs/${image_name}.png`;
             }
         }
         __decorate([

@@ -40,10 +40,10 @@ declare namespace $ {
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	type $mol_view__sub_azero_app_search_9 = $mol_type_enforce<
+	type $mol_list__rows_azero_app_search_9 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_view['sub'] >
+		ReturnType< $mol_list['rows'] >
 	>
 	type $mol_list__rows_azero_app_search_10 = $mol_type_enforce<
 		ReturnType< $azero_app_search['card_list'] >
@@ -61,7 +61,7 @@ declare namespace $ {
 		Image( id: any): $mol_image
 		get_classes( id: any): string
 		Classes( id: any): $mol_text
-		Card( id: any): $mol_view
+		Card( id: any): $mol_list
 		card_list( ): readonly(any)[]
 		Row_cards( ): $mol_list
 		title( ): string

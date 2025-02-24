@@ -45,8 +45,8 @@
 			return obj;
 		}
 		Card(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Image(id)), (this.Classes(id))]);
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([(this.Image(id)), (this.Classes(id))]);
 			return obj;
 		}
 		card_list(){
