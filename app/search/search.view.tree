@@ -9,6 +9,14 @@ $azero_app_search $mol_page
 			<= Search_button $mol_button_major
 				title \Искать
 				click? <=> fetch_search? null
+		<= Search_filters $mol_row sub <= search_filters /
+			<= Search_filter*0 $mol_button_major
+				hint \Убрать
+				click? <=> clear_search_filter*? null
+				sub / <= Search_labeler* $mol_labeler
+					title <= search_labeler_title* \Chemical formulae
+					content /
+						<= Search_labeler_content* $mol_paragraph title <= search_labeler_content* \Формула
 		<= Row_cards $mol_list rows <= card_list /
 			<= Card*0 $mol_list rows /
 				<= Image* $mol_image

@@ -2683,8 +2683,8 @@ var $;
 			if(next !== undefined) return next;
 			return 0;
 		}
-		field(){
-			return {...(super.field()), "tabIndex": (this.tabindex())};
+		attr(){
+			return {...(super.attr()), "tabindex": (this.tabindex())};
 		}
 		event(){
 			return {...(super.event()), "scroll": (next) => (this.event_scroll(next))};
@@ -7000,6 +7000,44 @@ var $;
 "use strict";
 
 ;
+	($.$mol_labeler) = class $mol_labeler extends ($.$mol_list) {
+		label(){
+			return [(this.title())];
+		}
+		Label(){
+			const obj = new this.$.$mol_view();
+			(obj.minimal_height) = () => (32);
+			(obj.sub) = () => ((this.label()));
+			return obj;
+		}
+		content(){
+			return [];
+		}
+		Content(){
+			const obj = new this.$.$mol_view();
+			(obj.minimal_height) = () => (24);
+			(obj.sub) = () => ((this.content()));
+			return obj;
+		}
+		rows(){
+			return [(this.Label()), (this.Content())];
+		}
+	};
+	($mol_mem(($.$mol_labeler.prototype), "Label"));
+	($mol_mem(($.$mol_labeler.prototype), "Content"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/labeler/labeler.view.css", "[mol_labeler] {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: stretch;\n\tcursor: inherit;\n}\n\n[mol_labeler_label] {\n\tmin-height: 2rem;\n\tcolor: var(--mol_theme_shade);\n\tpadding: .5rem .75rem 0;\n\tgap: 0 var(--mol_gap_block);\n\tflex-wrap: wrap;\n}\n\n[mol_labeler_content] {\n\tdisplay: flex;\n\tpadding: var(--mol_gap_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
 	($.$mol_image) = class $mol_image extends ($.$mol_view) {
 		uri(){
 			return "";
@@ -9705,6 +9743,42 @@ var $;
 			(obj.sub) = () => ([(this.Search()), (this.Search_button())]);
 			return obj;
 		}
+		clear_search_filter(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		search_labeler_title(id){
+			return "Chemical formulae";
+		}
+		search_labeler_content(id){
+			return "Формула";
+		}
+		Search_labeler_content(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.search_labeler_content(id)));
+			return obj;
+		}
+		Search_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.search_labeler_title(id)));
+			(obj.content) = () => ([(this.Search_labeler_content(id))]);
+			return obj;
+		}
+		Search_filter(id){
+			const obj = new this.$.$mol_button_major();
+			(obj.hint) = () => ("Убрать");
+			(obj.click) = (next) => ((this.clear_search_filter(id, next)));
+			(obj.sub) = () => ([(this.Search_labeler(id))]);
+			return obj;
+		}
+		search_filters(){
+			return [(this.Search_filter("0"))];
+		}
+		Search_filters(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ((this.search_filters()));
+			return obj;
+		}
 		get_image(id){
 			return "";
 		}
@@ -9738,7 +9812,11 @@ var $;
 			return "Поиск";
 		}
 		body(){
-			return [(this.Search_row()), (this.Row_cards())];
+			return [
+				(this.Search_row()), 
+				(this.Search_filters()), 
+				(this.Row_cards())
+			];
 		}
 	};
 	($mol_mem(($.$azero_app_search.prototype), "search"));
@@ -9746,6 +9824,11 @@ var $;
 	($mol_mem(($.$azero_app_search.prototype), "fetch_search"));
 	($mol_mem(($.$azero_app_search.prototype), "Search_button"));
 	($mol_mem(($.$azero_app_search.prototype), "Search_row"));
+	($mol_mem_key(($.$azero_app_search.prototype), "clear_search_filter"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Search_labeler_content"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Search_labeler"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Search_filter"));
+	($mol_mem(($.$azero_app_search.prototype), "Search_filters"));
 	($mol_mem_key(($.$azero_app_search.prototype), "Image"));
 	($mol_mem_key(($.$azero_app_search.prototype), "Classes"));
 	($mol_mem_key(($.$azero_app_search.prototype), "Card"));
@@ -9762,18 +9845,35 @@ var $;
     var $$;
     (function ($$) {
         class $azero_app_search extends $.$azero_app_search {
-            dumb_query() {
-                return '{"elements":"Ge-K"}';
+            dumb_query(next) {
+                return next ?? { props: 'superconductivity', formulae: 'Fe3P' };
             }
             fetch_refinement(next) {
                 const query = this.dumb_query();
                 const urlRefinement = 'https://api.mpds.io/v0/search/refinement?q=';
-                return $mol_fetch.json(urlRefinement + query);
+                return $mol_fetch.json(urlRefinement + JSON.stringify(query));
+            }
+            filters_query() {
+                return Object.entries(this.dumb_query()) || [];
+            }
+            search_filters() {
+                return this.filters_query().map(([filter, value]) => this.Search_filter(filter));
+            }
+            search_labeler_title(id) {
+                return id;
+            }
+            search_labeler_content(id) {
+                return this.dumb_query()[id];
+            }
+            clear_search_filter(id, next) {
+                const new_query = { ...this.dumb_query() };
+                delete new_query[id];
+                this.dumb_query(new_query);
             }
             fetch_facet(next) {
                 const query = this.dumb_query();
                 const urlFacet = 'https://api.mpds.io/v0/search/facet?q=';
-                return $mol_fetch.json(urlFacet + query);
+                return $mol_fetch.json(urlFacet + JSON.stringify(query));
             }
             fetch_search() {
                 if (this.search()) {
@@ -9797,6 +9897,8 @@ var $;
                 return [];
             }
             card_list() {
+                if (!this.fetch_facet().out)
+                    return [];
                 return this.fetch_facet()?.out?.map((card, index) => this.Card(index));
             }
             get_classes(id) {
@@ -9808,6 +9910,9 @@ var $;
                 return `https://mpds.io/${category}_thumbs/${image_name}.png`;
             }
         }
+        __decorate([
+            $mol_mem
+        ], $azero_app_search.prototype, "dumb_query", null);
         __decorate([
             $mol_mem
         ], $azero_app_search.prototype, "fetch_facet", null);

@@ -28,6 +28,42 @@
 			(obj.sub) = () => ([(this.Search()), (this.Search_button())]);
 			return obj;
 		}
+		clear_search_filter(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		search_labeler_title(id){
+			return "Chemical formulae";
+		}
+		search_labeler_content(id){
+			return "Формула";
+		}
+		Search_labeler_content(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.search_labeler_content(id)));
+			return obj;
+		}
+		Search_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.search_labeler_title(id)));
+			(obj.content) = () => ([(this.Search_labeler_content(id))]);
+			return obj;
+		}
+		Search_filter(id){
+			const obj = new this.$.$mol_button_major();
+			(obj.hint) = () => ("Убрать");
+			(obj.click) = (next) => ((this.clear_search_filter(id, next)));
+			(obj.sub) = () => ([(this.Search_labeler(id))]);
+			return obj;
+		}
+		search_filters(){
+			return [(this.Search_filter("0"))];
+		}
+		Search_filters(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ((this.search_filters()));
+			return obj;
+		}
 		get_image(id){
 			return "";
 		}
@@ -61,7 +97,11 @@
 			return "Поиск";
 		}
 		body(){
-			return [(this.Search_row()), (this.Row_cards())];
+			return [
+				(this.Search_row()), 
+				(this.Search_filters()), 
+				(this.Row_cards())
+			];
 		}
 	};
 	($mol_mem(($.$azero_app_search.prototype), "search"));
@@ -69,6 +109,11 @@
 	($mol_mem(($.$azero_app_search.prototype), "fetch_search"));
 	($mol_mem(($.$azero_app_search.prototype), "Search_button"));
 	($mol_mem(($.$azero_app_search.prototype), "Search_row"));
+	($mol_mem_key(($.$azero_app_search.prototype), "clear_search_filter"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Search_labeler_content"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Search_labeler"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Search_filter"));
+	($mol_mem(($.$azero_app_search.prototype), "Search_filters"));
 	($mol_mem_key(($.$azero_app_search.prototype), "Image"));
 	($mol_mem_key(($.$azero_app_search.prototype), "Classes"));
 	($mol_mem_key(($.$azero_app_search.prototype), "Card"));

@@ -1,30 +1,51 @@
 //api.mpds.io/v0/search/selectize?q= - автокомплит
 namespace $.$$ {
 	export class $azero_app_search extends $.$azero_app_search {
-		
-		dumb_query() {
-			return '{"elements":"Ge-K"}'
-		}
+		@$mol_mem
+        dumb_query(next?:any) {
+            return next ?? { props: 'superconductivity', formulae: 'Fe3P' }
+        }
 
         fetch_refinement(next?: any) {
-			const query = this.dumb_query()
-			const urlRefinement = 'https://api.mpds.io/v0/search/refinement?q='
-			return $mol_fetch.json(urlRefinement + query)
+            const query = this.dumb_query()
+            const urlRefinement = 'https://api.mpds.io/v0/search/refinement?q='
+            return $mol_fetch.json(urlRefinement + JSON.stringify(query))
+        }
+
+        filters_query() {
+            return Object.entries(this.dumb_query()) || []
+        }
+
+        search_filters(): readonly any[] {
+            return this.filters_query().map(([filter, value]) => this.Search_filter(filter))
+        }
+
+        search_labeler_title(id: any): string {
+            return id
+        }
+        search_labeler_content(id: any): string {
+			return this.dumb_query()[id as 'props'] 
 		}
-		
-		@$mol_mem
+
+		clear_search_filter( id: any, next?: any ) {
+			const new_query = { ...this.dumb_query() }
+			delete new_query[id]
+			this.dumb_query(new_query)
+		}
+
+        @$mol_mem
         fetch_facet(next?: any) {
-			const query = this.dumb_query()
-			const urlFacet = 'https://api.mpds.io/v0/search/facet?q='
-			return $mol_fetch.json( urlFacet + query ) as { out: [ string, string ][] }
-		}
-		
-		fetch_search() {
-			if( this.search() ) {
-				this.fetch_refinement()
-				this.fetch_facet()
-			}
-		}
+            const query = this.dumb_query()
+            const urlFacet = 'https://api.mpds.io/v0/search/facet?q='
+            return $mol_fetch.json(urlFacet + JSON.stringify(query)) as { out: [string, string][] }
+        }
+
+        fetch_search() {
+            if (this.search()) {
+                this.fetch_refinement()
+                this.fetch_facet()
+            }
+        }
 
         fetch_suggests() {
             if (this.search()) {
@@ -43,20 +64,20 @@ namespace $.$$ {
             return []
         }
 
-        card_list() {
+		card_list() {
+			if (!this.fetch_facet().out) return []
             return this.fetch_facet()?.out?.map((card, index) => this.Card(index))
-		}
-		
-		get_classes(id: any): string {
-			return this.fetch_facet()?.out?.[id]?.[1]
-		}
+        }
 
-		get_image( id: any ): string {
-			const image_name = this.fetch_facet()?.out?.[ id ]?.[ 0 ]
-			const category = image_name.startsWith( 'C' ) ? 'pd': 'rd'
-			return `https://mpds.io/${category}_thumbs/${image_name}.png`
-		}
+        get_classes(id: any): string {
+            return this.fetch_facet()?.out?.[id]?.[1]
+        }
 
+        get_image(id: any): string {
+            const image_name = this.fetch_facet()?.out?.[id]?.[0]
+            const category = image_name.startsWith('C') ? 'pd' : 'rd'
+            return `https://mpds.io/${category}_thumbs/${image_name}.png`
+        }
 
         // Cards(id: any): any {
         // 	return this.card_list().map( (card, index) => this.Cards( index ) )
