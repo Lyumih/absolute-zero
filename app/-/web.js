@@ -6968,38 +6968,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_button_major) = class $mol_button_major extends ($.$mol_button_minor) {
-		theme(){
-			return "$mol_theme_base";
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major] {\n\tbackground-color: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
 	($.$mol_labeler) = class $mol_labeler extends ($.$mol_list) {
 		label(){
 			return [(this.title())];
@@ -7036,6 +7004,309 @@ var $;
 
 ;
 "use strict";
+
+;
+	($.$mol_button_major) = class $mol_button_major extends ($.$mol_button_minor) {
+		theme(){
+			return "$mol_theme_base";
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major] {\n\tbackground-color: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$mol_check) = class $mol_check extends ($.$mol_button_minor) {
+		checked(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		aria_checked(){
+			return "false";
+		}
+		aria_role(){
+			return "checkbox";
+		}
+		Icon(){
+			return null;
+		}
+		title(){
+			return "";
+		}
+		Title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.title())]);
+			return obj;
+		}
+		label(){
+			return [(this.Title())];
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"mol_check_checked": (this.checked()), 
+				"aria-checked": (this.aria_checked()), 
+				"role": (this.aria_role())
+			};
+		}
+		sub(){
+			return [(this.Icon()), (this.label())];
+		}
+	};
+	($mol_mem(($.$mol_check.prototype), "checked"));
+	($mol_mem(($.$mol_check.prototype), "Title"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/check.css", "[mol_check] {\n\tflex: 0 0 auto;\n\tjustify-content: flex-start;\n\talign-content: center;\n\t/* align-items: flex-start; */\n\tborder: none;\n\tfont-weight: inherit;\n\tbox-shadow: none;\n\ttext-align: left;\n\tdisplay: inline-flex;\n\tflex-wrap: nowrap;\n}\n\n[mol_check_title] {\n\tflex-shrink: 1;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_check extends $.$mol_check {
+            click(next) {
+                if (next?.defaultPrevented)
+                    return;
+                this.checked(!this.checked());
+                if (next)
+                    next.preventDefault();
+            }
+            sub() {
+                return [
+                    ...$mol_maybe(this.Icon()),
+                    ...this.label(),
+                ];
+            }
+            label() {
+                return this.title() ? super.label() : [];
+            }
+            aria_checked() {
+                return String(this.checked());
+            }
+        }
+        $$.$mol_check = $mol_check;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_check_list) = class $mol_check_list extends ($.$mol_view) {
+		option_checked(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		option_title(id){
+			return "";
+		}
+		option_label(id){
+			return [(this.option_title(id))];
+		}
+		enabled(){
+			return true;
+		}
+		option_enabled(id){
+			return (this.enabled());
+		}
+		option_hint(id){
+			return "";
+		}
+		items(){
+			return [];
+		}
+		dictionary(){
+			return {};
+		}
+		Option(id){
+			const obj = new this.$.$mol_check();
+			(obj.checked) = (next) => ((this.option_checked(id, next)));
+			(obj.label) = () => ((this.option_label(id)));
+			(obj.enabled) = () => ((this.option_enabled(id)));
+			(obj.hint) = () => ((this.option_hint(id)));
+			(obj.minimal_height) = () => (24);
+			return obj;
+		}
+		options(){
+			return {};
+		}
+		keys(){
+			return [];
+		}
+		sub(){
+			return (this.items());
+		}
+	};
+	($mol_mem_key(($.$mol_check_list.prototype), "option_checked"));
+	($mol_mem_key(($.$mol_check_list.prototype), "Option"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_check_list extends $.$mol_check_list {
+            options() {
+                return {};
+            }
+            dictionary(next) {
+                return next ?? {};
+            }
+            option_checked(id, next) {
+                const prev = this.dictionary();
+                if (next === undefined)
+                    return prev[id] ?? null;
+                const next_rec = { ...prev, [id]: next };
+                if (next === null)
+                    delete next_rec[id];
+                return this.dictionary(next_rec)[id] ?? null;
+            }
+            keys() {
+                return Object.keys(this.options());
+            }
+            items() {
+                return this.keys().map(key => this.Option(key));
+            }
+            option_title(key) {
+                return this.options()[key] || key;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "keys", null);
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "items", null);
+        $$.$mol_check_list = $mol_check_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/list/list.view.css", "[mol_check_list] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tgap: 1px;\n}\n\n[mol_check_list_option] {\n\tflex: 0 1 auto;\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"]) {\n\ttext-shadow: 0 0;\n\tcolor: var(--mol_theme_current);\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"][disabled]) {\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_switch) = class $mol_switch extends ($.$mol_check_list) {
+		value(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+	};
+	($mol_mem(($.$mol_switch.prototype), "value"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_state_session extends $mol_object {
+        static 'native()';
+        static native() {
+            if (this['native()'])
+                return this['native()'];
+            check: try {
+                const native = $mol_dom_context.sessionStorage;
+                if (!native)
+                    break check;
+                native.setItem('', '');
+                native.removeItem('');
+                return this['native()'] = native;
+            }
+            catch (error) {
+                console.warn(error);
+            }
+            return this['native()'] = {
+                getItem(key) {
+                    return this[':' + key];
+                },
+                setItem(key, value) {
+                    this[':' + key] = value;
+                },
+                removeItem(key) {
+                    this[':' + key] = void 0;
+                }
+            };
+        }
+        static value(key, next) {
+            if (next === void 0)
+                return JSON.parse(this.native().getItem(key) || 'null');
+            if (next === null)
+                this.native().removeItem(key);
+            else
+                this.native().setItem(key, JSON.stringify(next));
+            return next;
+        }
+        prefix() { return ''; }
+        value(key, next) {
+            return $mol_state_session.value(this.prefix() + '.' + key, next);
+        }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $mol_state_session, "value", null);
+    $.$mol_state_session = $mol_state_session;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_switch extends $.$mol_switch {
+            value(next) {
+                return $mol_state_session.value(`${this}.value()`, next) ?? '';
+            }
+            option_checked(key, next) {
+                if (next === undefined)
+                    return this.value() == key;
+                this.value(next ? key : '');
+                return next;
+            }
+        }
+        $$.$mol_switch = $mol_switch;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
 
 ;
 	($.$mol_image) = class $mol_image extends ($.$mol_view) {
@@ -7892,89 +8163,6 @@ var $;
 "use strict";
 
 ;
-	($.$mol_check) = class $mol_check extends ($.$mol_button_minor) {
-		checked(next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		aria_checked(){
-			return "false";
-		}
-		aria_role(){
-			return "checkbox";
-		}
-		Icon(){
-			return null;
-		}
-		title(){
-			return "";
-		}
-		Title(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.title())]);
-			return obj;
-		}
-		label(){
-			return [(this.Title())];
-		}
-		attr(){
-			return {
-				...(super.attr()), 
-				"mol_check_checked": (this.checked()), 
-				"aria-checked": (this.aria_checked()), 
-				"role": (this.aria_role())
-			};
-		}
-		sub(){
-			return [(this.Icon()), (this.label())];
-		}
-	};
-	($mol_mem(($.$mol_check.prototype), "checked"));
-	($mol_mem(($.$mol_check.prototype), "Title"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/check/check.css", "[mol_check] {\n\tflex: 0 0 auto;\n\tjustify-content: flex-start;\n\talign-content: center;\n\t/* align-items: flex-start; */\n\tborder: none;\n\tfont-weight: inherit;\n\tbox-shadow: none;\n\ttext-align: left;\n\tdisplay: inline-flex;\n\tflex-wrap: nowrap;\n}\n\n[mol_check_title] {\n\tflex-shrink: 1;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_check extends $.$mol_check {
-            click(next) {
-                if (next?.defaultPrevented)
-                    return;
-                this.checked(!this.checked());
-                if (next)
-                    next.preventDefault();
-            }
-            sub() {
-                return [
-                    ...$mol_maybe(this.Icon()),
-                    ...this.label(),
-                ];
-            }
-            label() {
-                return this.title() ? super.label() : [];
-            }
-            aria_checked() {
-                return String(this.checked());
-            }
-        }
-        $$.$mol_check = $mol_check;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
 	($.$mol_icon_chevron) = class $mol_icon_chevron extends ($.$mol_icon) {
 		path(){
 			return "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z";
@@ -8195,58 +8383,6 @@ var $;
 	};
 	($.$mol_grid_number) = class $mol_grid_number extends ($.$mol_grid_cell) {};
 
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_state_session extends $mol_object {
-        static 'native()';
-        static native() {
-            if (this['native()'])
-                return this['native()'];
-            check: try {
-                const native = $mol_dom_context.sessionStorage;
-                if (!native)
-                    break check;
-                native.setItem('', '');
-                native.removeItem('');
-                return this['native()'] = native;
-            }
-            catch (error) {
-                console.warn(error);
-            }
-            return this['native()'] = {
-                getItem(key) {
-                    return this[':' + key];
-                },
-                setItem(key, value) {
-                    this[':' + key] = value;
-                },
-                removeItem(key) {
-                    this[':' + key] = void 0;
-                }
-            };
-        }
-        static value(key, next) {
-            if (next === void 0)
-                return JSON.parse(this.native().getItem(key) || 'null');
-            if (next === null)
-                this.native().removeItem(key);
-            else
-                this.native().setItem(key, JSON.stringify(next));
-            return next;
-        }
-        prefix() { return ''; }
-        value(key, next) {
-            return $mol_state_session.value(this.prefix() + '.' + key, next);
-        }
-    }
-    __decorate([
-        $mol_mem_key
-    ], $mol_state_session, "value", null);
-    $.$mol_state_session = $mol_state_session;
-})($ || ($ = {}));
 
 ;
 "use strict";
@@ -9713,36 +9849,7 @@ var $;
 "use strict";
 
 ;
-	($.$azero_app_search) = class $azero_app_search extends ($.$mol_page) {
-		search(next){
-			if(next !== undefined) return next;
-			return "antiferromagnet";
-		}
-		suggests(){
-			return [];
-		}
-		Search(){
-			const obj = new this.$.$mol_search();
-			(obj.hint) = () => (" Type property, elements, classes");
-			(obj.query) = (next) => ((this.search(next)));
-			(obj.suggests) = () => ((this.suggests()));
-			return obj;
-		}
-		fetch_search(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Search_button(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Искать");
-			(obj.click) = (next) => ((this.fetch_search(next)));
-			return obj;
-		}
-		Search_row(){
-			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ([(this.Search()), (this.Search_button())]);
-			return obj;
-		}
+	($.$azero_app_search) = class $azero_app_search extends ($.$mol_book2) {
 		clear_search_filter(id, next){
 			if(next !== undefined) return next;
 			return null;
@@ -9779,6 +9886,76 @@ var $;
 			(obj.sub) = () => ((this.search_filters()));
 			return obj;
 		}
+		refinement_filters_title(id){
+			return "qwe";
+		}
+		Filter_button(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.refinement_filters_title(id)));
+			return obj;
+		}
+		refinement_filter_list(){
+			return [(this.Filter_button("0"))];
+		}
+		Filters(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.refinement_filter_list()));
+			return obj;
+		}
+		Filters_page(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("Фильтры");
+			(obj.body) = () => ([(this.Search_filters()), (this.Filters())]);
+			return obj;
+		}
+		search(next){
+			if(next !== undefined) return next;
+			return "antiferromagnet";
+		}
+		suggests(){
+			return [];
+		}
+		Search(){
+			const obj = new this.$.$mol_search();
+			(obj.hint) = () => ("Type property, elements, classes");
+			(obj.query) = (next) => ((this.search(next)));
+			(obj.suggests) = () => ((this.suggests()));
+			return obj;
+		}
+		fetch_search(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Search_button(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ("Искать");
+			(obj.click) = (next) => ((this.fetch_search(next)));
+			return obj;
+		}
+		Search_row(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.Search()), (this.Search_button())]);
+			return obj;
+		}
+		search_type(next){
+			if(next !== undefined) return next;
+			return "0";
+		}
+		View_type_switch(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.search_type(next)));
+			(obj.options) = () => ({
+				"0": "entires", 
+				"1": "phases", 
+				"2": "articles"
+			});
+			return obj;
+		}
+		View_type_row(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.View_type_switch())]);
+			return obj;
+		}
 		get_image(id){
 			return "";
 		}
@@ -9808,31 +9985,41 @@ var $;
 			(obj.rows) = () => ((this.card_list()));
 			return obj;
 		}
+		Result_page(){
+			const obj = new this.$.$mol_page();
+			(obj.Title) = () => (null);
+			(obj.tools) = () => ([(this.Search_row()), (this.View_type_row())]);
+			(obj.body) = () => ([(this.Row_cards())]);
+			return obj;
+		}
 		title(){
 			return "Поиск";
 		}
-		body(){
-			return [
-				(this.Search_row()), 
-				(this.Search_filters()), 
-				(this.Row_cards())
-			];
+		pages(){
+			return [(this.Filters_page()), (this.Result_page())];
 		}
 	};
-	($mol_mem(($.$azero_app_search.prototype), "search"));
-	($mol_mem(($.$azero_app_search.prototype), "Search"));
-	($mol_mem(($.$azero_app_search.prototype), "fetch_search"));
-	($mol_mem(($.$azero_app_search.prototype), "Search_button"));
-	($mol_mem(($.$azero_app_search.prototype), "Search_row"));
 	($mol_mem_key(($.$azero_app_search.prototype), "clear_search_filter"));
 	($mol_mem_key(($.$azero_app_search.prototype), "Search_labeler_content"));
 	($mol_mem_key(($.$azero_app_search.prototype), "Search_labeler"));
 	($mol_mem_key(($.$azero_app_search.prototype), "Search_filter"));
 	($mol_mem(($.$azero_app_search.prototype), "Search_filters"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Filter_button"));
+	($mol_mem(($.$azero_app_search.prototype), "Filters"));
+	($mol_mem(($.$azero_app_search.prototype), "Filters_page"));
+	($mol_mem(($.$azero_app_search.prototype), "search"));
+	($mol_mem(($.$azero_app_search.prototype), "Search"));
+	($mol_mem(($.$azero_app_search.prototype), "fetch_search"));
+	($mol_mem(($.$azero_app_search.prototype), "Search_button"));
+	($mol_mem(($.$azero_app_search.prototype), "Search_row"));
+	($mol_mem(($.$azero_app_search.prototype), "search_type"));
+	($mol_mem(($.$azero_app_search.prototype), "View_type_switch"));
+	($mol_mem(($.$azero_app_search.prototype), "View_type_row"));
 	($mol_mem_key(($.$azero_app_search.prototype), "Image"));
 	($mol_mem_key(($.$azero_app_search.prototype), "Classes"));
 	($mol_mem_key(($.$azero_app_search.prototype), "Card"));
 	($mol_mem(($.$azero_app_search.prototype), "Row_cards"));
+	($mol_mem(($.$azero_app_search.prototype), "Result_page"));
 
 
 ;
@@ -9846,12 +10033,28 @@ var $;
     (function ($$) {
         class $azero_app_search extends $.$azero_app_search {
             dumb_query(next) {
-                return next ?? { props: 'superconductivity', formulae: 'Fe3P' };
+                return (next ?? {
+                    classes: 'zeolite',
+                    lattices: 'orthorhombic',
+                    elements: 'Al',
+                    search_type: +this.search_type(),
+                });
             }
             fetch_refinement(next) {
                 const query = this.dumb_query();
                 const urlRefinement = 'https://api.mpds.io/v0/search/refinement?q=';
                 return $mol_fetch.json(urlRefinement + JSON.stringify(query));
+            }
+            refinement_data() {
+                return this.fetch_refinement().payload;
+            }
+            refinement_filter_list() {
+                const { payload } = this.fetch_refinement();
+                return this.refinement_data().map((_, index) => this.Filter_button(index));
+            }
+            refinement_filters_title(id) {
+                const { facet, value, count } = this.refinement_data()[id];
+                return facet + ' ' + count + ':' + value;
             }
             filters_query() {
                 return Object.entries(this.dumb_query()) || [];
@@ -9913,6 +10116,12 @@ var $;
         __decorate([
             $mol_mem
         ], $azero_app_search.prototype, "dumb_query", null);
+        __decorate([
+            $mol_action
+        ], $azero_app_search.prototype, "fetch_refinement", null);
+        __decorate([
+            $mol_mem
+        ], $azero_app_search.prototype, "refinement_data", null);
         __decorate([
             $mol_mem
         ], $azero_app_search.prototype, "fetch_facet", null);

@@ -1,15 +1,42 @@
 //api.mpds.io/v0/search/selectize?q= - автокомплит
 namespace $.$$ {
 	export class $azero_app_search extends $.$azero_app_search {
-		@$mol_mem
-        dumb_query(next?:any) {
-            return next ?? { props: 'superconductivity', formulae: 'Fe3P' }
+        @$mol_mem
+        dumb_query(next?: any) {
+            return (
+                next ?? {
+                    classes: 'zeolite',
+                    lattices: 'orthorhombic',
+                    elements: 'Al',
+                    search_type: +this.search_type(),
+                }
+            )
         }
 
+
+		@$mol_action
         fetch_refinement(next?: any) {
             const query = this.dumb_query()
             const urlRefinement = 'https://api.mpds.io/v0/search/refinement?q='
-            return $mol_fetch.json(urlRefinement + JSON.stringify(query))
+            return $mol_fetch.json(urlRefinement + JSON.stringify(query)) as {
+                error: null
+                payload: { facet: string; value: string; count: number }[]
+            }
+        }
+
+		@$mol_mem
+        refinement_data() {
+			return this.fetch_refinement().payload
+		}
+
+        refinement_filter_list() {
+            const { payload } = this.fetch_refinement()
+            return this.refinement_data().map((_, index) => this.Filter_button(index))
+        }
+
+		refinement_filters_title( id: any ): string {
+			const {facet, value, count} = this.refinement_data()[id]
+            return facet + ' ' +count + ':' + value
         }
 
         filters_query() {
@@ -24,14 +51,14 @@ namespace $.$$ {
             return id
         }
         search_labeler_content(id: any): string {
-			return this.dumb_query()[id as 'props'] 
-		}
+            return this.dumb_query()[id as 'props']
+        }
 
-		clear_search_filter( id: any, next?: any ) {
-			const new_query = { ...this.dumb_query() }
-			delete new_query[id]
-			this.dumb_query(new_query)
-		}
+        clear_search_filter(id: any, next?: any) {
+            const new_query = { ...this.dumb_query() }
+            delete new_query[id]
+            this.dumb_query(new_query)
+        }
 
         @$mol_mem
         fetch_facet(next?: any) {
@@ -64,8 +91,8 @@ namespace $.$$ {
             return []
         }
 
-		card_list() {
-			if (!this.fetch_facet().out) return []
+        card_list() {
+            if (!this.fetch_facet().out) return []
             return this.fetch_facet()?.out?.map((card, index) => this.Card(index))
         }
 

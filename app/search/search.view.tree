@@ -1,24 +1,41 @@
-$azero_app_search $mol_page
+$azero_app_search $mol_book2
 	title \Поиск
-	body /
-		<= Search_row $mol_row sub /
-			<= Search $mol_search
-				hint \ Type property, elements, classes
-				query? <=> search? \antiferromagnet
-				suggests <= suggests /
-			<= Search_button $mol_button_major
-				title \Искать
-				click? <=> fetch_search? null
-		<= Search_filters $mol_row sub <= search_filters /
-			<= Search_filter*0 $mol_button_major
-				hint \Убрать
-				click? <=> clear_search_filter*? null
-				sub / <= Search_labeler* $mol_labeler
-					title <= search_labeler_title* \Chemical formulae
-					content /
-						<= Search_labeler_content* $mol_paragraph title <= search_labeler_content* \Формула
-		<= Row_cards $mol_list rows <= card_list /
-			<= Card*0 $mol_list rows /
-				<= Image* $mol_image
-					uri <= get_image* \
-				<= Classes* $mol_text text <= get_classes* \
+	pages /
+		<= Filters_page $mol_page
+			title \Фильтры
+			body /
+				<= Search_filters $mol_row sub <= search_filters /
+					<= Search_filter*0 $mol_button_major
+						hint \Убрать
+						click? <=> clear_search_filter*? null
+						sub / <= Search_labeler* $mol_labeler
+							title <= search_labeler_title* \Chemical formulae
+							content /
+								<= Search_labeler_content* $mol_paragraph title <= search_labeler_content* \Формула
+				<= Filters $mol_list rows <= refinement_filter_list /
+					<= Filter_button*0 $mol_button_minor
+						title <= refinement_filters_title* \qwe
+		<= Result_page $mol_page
+			Title null
+			tools /
+				<= Search_row $mol_row sub /
+					<= Search $mol_search
+						hint \Type property, elements, classes
+						query? <=> search? \antiferromagnet
+						suggests <= suggests /
+					<= Search_button $mol_button_major
+						title \Искать
+						click? <=> fetch_search? null
+				<= View_type_row $mol_row sub /
+					<= View_type_switch $mol_switch
+						value? <=> search_type? \0
+						options *
+							0 \entires
+							1 \phases
+							2 \articles
+			body /
+				<= Row_cards $mol_list rows <= card_list /
+					<= Card*0 $mol_list rows /
+						<= Image* $mol_image
+							uri <= get_image* \
+						<= Classes* $mol_text text <= get_classes* \
