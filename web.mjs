@@ -8498,26 +8498,63 @@ var $;
 			(obj.sub) = () => ((this.search_filters()));
 			return obj;
 		}
-		refinement_filters_title(id){
-			return "qwe";
+		refinement_filter_options(id){
+			return {};
 		}
-		Filter_button(id){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.refinement_filters_title(id)));
+		Elements_filter(){
+			const obj = new this.$.$mol_check_list();
+			(obj.options) = () => ((this.refinement_filter_options("elements")));
 			return obj;
 		}
-		refinement_filter_list(){
-			return [(this.Filter_button("0"))];
+		Filter_elements_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Chemical elements");
+			(obj.content) = () => ([(this.Elements_filter())]);
+			return obj;
 		}
-		Filters(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.refinement_filter_list()));
+		Props_filter(){
+			const obj = new this.$.$mol_check_list();
+			(obj.options) = () => ((this.refinement_filter_options("props")));
+			return obj;
+		}
+		Filter_props_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Physical properties");
+			(obj.content) = () => ([(this.Props_filter())]);
+			return obj;
+		}
+		Classes_filter(){
+			const obj = new this.$.$mol_check_list();
+			(obj.options) = () => ((this.refinement_filter_options("classes")));
+			return obj;
+		}
+		Filter_classes_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Materials classes");
+			(obj.content) = () => ([(this.Classes_filter())]);
+			return obj;
+		}
+		Lattices_filter(){
+			const obj = new this.$.$mol_check_list();
+			(obj.options) = () => ((this.refinement_filter_options("lattices")));
+			return obj;
+		}
+		Filter_lattices_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Crystal systems");
+			(obj.content) = () => ([(this.Lattices_filter())]);
 			return obj;
 		}
 		Filters_page(){
 			const obj = new this.$.$mol_page();
 			(obj.title) = () => ("Фильтры");
-			(obj.body) = () => ([(this.Search_filters()), (this.Filters())]);
+			(obj.body) = () => ([
+				(this.Search_filters()), 
+				(this.Filter_elements_labeler()), 
+				(this.Filter_props_labeler()), 
+				(this.Filter_classes_labeler()), 
+				(this.Filter_lattices_labeler())
+			]);
 			return obj;
 		}
 		search(next){
@@ -8639,8 +8676,14 @@ var $;
 	($mol_mem_key(($.$optimade_zero_search.prototype), "Search_labeler"));
 	($mol_mem_key(($.$optimade_zero_search.prototype), "Search_filter"));
 	($mol_mem(($.$optimade_zero_search.prototype), "Search_filters"));
-	($mol_mem_key(($.$optimade_zero_search.prototype), "Filter_button"));
-	($mol_mem(($.$optimade_zero_search.prototype), "Filters"));
+	($mol_mem(($.$optimade_zero_search.prototype), "Elements_filter"));
+	($mol_mem(($.$optimade_zero_search.prototype), "Filter_elements_labeler"));
+	($mol_mem(($.$optimade_zero_search.prototype), "Props_filter"));
+	($mol_mem(($.$optimade_zero_search.prototype), "Filter_props_labeler"));
+	($mol_mem(($.$optimade_zero_search.prototype), "Classes_filter"));
+	($mol_mem(($.$optimade_zero_search.prototype), "Filter_classes_labeler"));
+	($mol_mem(($.$optimade_zero_search.prototype), "Lattices_filter"));
+	($mol_mem(($.$optimade_zero_search.prototype), "Filter_lattices_labeler"));
 	($mol_mem(($.$optimade_zero_search.prototype), "Filters_page"));
 	($mol_mem(($.$optimade_zero_search.prototype), "search"));
 	($mol_mem(($.$optimade_zero_search.prototype), "Search"));
@@ -8741,20 +8784,23 @@ var $;
     var $$;
     (function ($$) {
         class $optimade_zero_search extends $.$optimade_zero_search {
-            refinement_filter_list() {
-                return this.mpds_api().filters()?.payload?.map((_, index) => this.Filter_button(index)) || [];
-            }
             parsed_query_row(next) {
-                return $mol_state_arg.value('q', next ? JSON.stringify($optimade_mpds_nlp.guess(next)) : null) ?? '';
+                return $mol_state_arg.value('q', next ? JSON.stringify($optimade_mpds_nlp.guess(next)) : '') ?? '';
             }
             parsed_query() {
                 const query = JSON.parse(this.parsed_query_row() || '{}');
                 query.search_type = +this.search_type();
                 return query;
             }
-            refinement_filters_title(id) {
-                const data = this.mpds_api()?.filters()?.payload?.[id];
-                return data?.facet + ' ' + data?.count + ': ' + data?.value;
+            refinement_filter_data() {
+                const data = this.mpds_api().filters()?.payload || [];
+                return data.reduce((acc, filter) => ({
+                    ...acc,
+                    [filter.facet]: { ...acc[filter.facet], [filter.value]: filter.value },
+                }), {});
+            }
+            refinement_filter_options(id) {
+                return this.refinement_filter_data()[id] || {};
             }
             filters_query() {
                 return Object.entries(this.parsed_query()) || [];
@@ -8783,7 +8829,9 @@ var $;
             card_list() {
                 if (!this.mpds_api().results())
                     return [];
-                return this.mpds_api().results()?.map((card, index) => this.Card(index)) || [];
+                return (this.mpds_api()
+                    .results()
+                    ?.map((card, index) => this.Card(index)) || []);
             }
             get_classes(id) {
                 return `<div>${this.mpds_api().results()?.[id].formula_html()}</div>`;
@@ -8803,6 +8851,13 @@ var $;
         ], $optimade_zero_search.prototype, "get_image", null);
         $$.$optimade_zero_search = $optimade_zero_search;
     })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("optimade/zero/search/search.view.css", "[optimade_zero_search_filters_page] {\n\twidth: 400px;\n}\n");
 })($ || ($ = {}));
 
 ;

@@ -3354,62 +3354,112 @@ declare namespace $ {
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_button_minor__title_optimade_zero_search_8 = $mol_type_enforce<
-		ReturnType< $optimade_zero_search['refinement_filters_title'] >
+	type $mol_check_list__options_optimade_zero_search_8 = $mol_type_enforce<
+		ReturnType< $optimade_zero_search['refinement_filter_options'] >
 		,
-		ReturnType< $mol_button_minor['title'] >
+		ReturnType< $mol_check_list['options'] >
 	>
-	type $mol_list__rows_optimade_zero_search_9 = $mol_type_enforce<
-		ReturnType< $optimade_zero_search['refinement_filter_list'] >
+	type $mol_labeler__title_optimade_zero_search_9 = $mol_type_enforce<
+		string
 		,
-		ReturnType< $mol_list['rows'] >
+		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_page__title_optimade_zero_search_10 = $mol_type_enforce<
+	type $mol_labeler__content_optimade_zero_search_10 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_labeler['content'] >
+	>
+	type $mol_check_list__options_optimade_zero_search_11 = $mol_type_enforce<
+		ReturnType< $optimade_zero_search['refinement_filter_options'] >
+		,
+		ReturnType< $mol_check_list['options'] >
+	>
+	type $mol_labeler__title_optimade_zero_search_12 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__content_optimade_zero_search_13 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_labeler['content'] >
+	>
+	type $mol_check_list__options_optimade_zero_search_14 = $mol_type_enforce<
+		ReturnType< $optimade_zero_search['refinement_filter_options'] >
+		,
+		ReturnType< $mol_check_list['options'] >
+	>
+	type $mol_labeler__title_optimade_zero_search_15 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__content_optimade_zero_search_16 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_labeler['content'] >
+	>
+	type $mol_check_list__options_optimade_zero_search_17 = $mol_type_enforce<
+		ReturnType< $optimade_zero_search['refinement_filter_options'] >
+		,
+		ReturnType< $mol_check_list['options'] >
+	>
+	type $mol_labeler__title_optimade_zero_search_18 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__content_optimade_zero_search_19 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_labeler['content'] >
+	>
+	type $mol_page__title_optimade_zero_search_20 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_page['title'] >
 	>
-	type $mol_page__body_optimade_zero_search_11 = $mol_type_enforce<
+	type $mol_page__body_optimade_zero_search_21 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['body'] >
 	>
-	type $mol_search__hint_optimade_zero_search_12 = $mol_type_enforce<
+	type $mol_search__hint_optimade_zero_search_22 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_search['hint'] >
 	>
-	type $mol_search__query_optimade_zero_search_13 = $mol_type_enforce<
+	type $mol_search__query_optimade_zero_search_23 = $mol_type_enforce<
 		ReturnType< $optimade_zero_search['search'] >
 		,
 		ReturnType< $mol_search['query'] >
 	>
-	type $mol_search__suggests_optimade_zero_search_14 = $mol_type_enforce<
+	type $mol_search__suggests_optimade_zero_search_24 = $mol_type_enforce<
 		ReturnType< $optimade_zero_search['suggests'] >
 		,
 		ReturnType< $mol_search['suggests'] >
 	>
-	type $mol_button_major__title_optimade_zero_search_15 = $mol_type_enforce<
+	type $mol_button_major__title_optimade_zero_search_25 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_optimade_zero_search_16 = $mol_type_enforce<
+	type $mol_button_major__click_optimade_zero_search_26 = $mol_type_enforce<
 		ReturnType< $optimade_zero_search['fetch_search'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_row__sub_optimade_zero_search_17 = $mol_type_enforce<
+	type $mol_row__sub_optimade_zero_search_27 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_switch__value_optimade_zero_search_18 = $mol_type_enforce<
+	type $mol_switch__value_optimade_zero_search_28 = $mol_type_enforce<
 		ReturnType< $optimade_zero_search['search_type'] >
 		,
 		ReturnType< $mol_switch['value'] >
 	>
-	type $mol_switch__options_optimade_zero_search_19 = $mol_type_enforce<
+	type $mol_switch__options_optimade_zero_search_29 = $mol_type_enforce<
 		({ 
 			'0': string,
 			'1': string,
@@ -3418,67 +3468,67 @@ declare namespace $ {
 		,
 		ReturnType< $mol_switch['options'] >
 	>
-	type $mol_row__sub_optimade_zero_search_20 = $mol_type_enforce<
+	type $mol_row__sub_optimade_zero_search_30 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_image__uri_optimade_zero_search_21 = $mol_type_enforce<
+	type $mol_image__uri_optimade_zero_search_31 = $mol_type_enforce<
 		ReturnType< $optimade_zero_search['get_image'] >
 		,
 		ReturnType< $mol_image['uri'] >
 	>
-	type $mol_html_view__html_optimade_zero_search_22 = $mol_type_enforce<
+	type $mol_html_view__html_optimade_zero_search_32 = $mol_type_enforce<
 		ReturnType< $optimade_zero_search['get_classes'] >
 		,
 		ReturnType< $mol_html_view['html'] >
 	>
-	type $mol_html_view__html_optimade_zero_search_23 = $mol_type_enforce<
+	type $mol_html_view__html_optimade_zero_search_33 = $mol_type_enforce<
 		ReturnType< $optimade_zero_search['get_description'] >
 		,
 		ReturnType< $mol_html_view['html'] >
 	>
-	type $mol_list__rows_optimade_zero_search_24 = $mol_type_enforce<
+	type $mol_list__rows_optimade_zero_search_34 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_row__sub_optimade_zero_search_25 = $mol_type_enforce<
+	type $mol_row__sub_optimade_zero_search_35 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_list__rows_optimade_zero_search_26 = $mol_type_enforce<
+	type $mol_list__rows_optimade_zero_search_36 = $mol_type_enforce<
 		ReturnType< $optimade_zero_search['card_list'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_page__title_optimade_zero_search_27 = $mol_type_enforce<
+	type $mol_page__title_optimade_zero_search_37 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_page['title'] >
 	>
-	type $mol_page__Title_optimade_zero_search_28 = $mol_type_enforce<
+	type $mol_page__Title_optimade_zero_search_38 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $mol_page['Title'] >
 	>
-	type $mol_page__tools_optimade_zero_search_29 = $mol_type_enforce<
+	type $mol_page__tools_optimade_zero_search_39 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['tools'] >
 	>
-	type $mol_page__body_optimade_zero_search_30 = $mol_type_enforce<
+	type $mol_page__body_optimade_zero_search_40 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['body'] >
 	>
-	type $optimade_zero_api__search_params_optimade_zero_search_31 = $mol_type_enforce<
+	type $optimade_zero_api__search_params_optimade_zero_search_41 = $mol_type_enforce<
 		ReturnType< $optimade_zero_search['parsed_query'] >
 		,
 		ReturnType< $optimade_zero_api['search_params'] >
 	>
-	type $optimade_zero_api__selectize_params_optimade_zero_search_32 = $mol_type_enforce<
+	type $optimade_zero_api__selectize_params_optimade_zero_search_42 = $mol_type_enforce<
 		ReturnType< $optimade_zero_search['search'] >
 		,
 		ReturnType< $optimade_zero_api['selectize_params'] >
@@ -3492,10 +3542,15 @@ declare namespace $ {
 		Search_filter( id: any): $mol_button_major
 		search_filters( ): readonly(any)[]
 		Search_filters( ): $mol_row
-		refinement_filters_title( id: any): string
-		Filter_button( id: any): $mol_button_minor
-		refinement_filter_list( ): readonly(any)[]
-		Filters( ): $mol_list
+		refinement_filter_options( id: any): Record<string, any>
+		Elements_filter( ): $mol_check_list
+		Filter_elements_labeler( ): $mol_labeler
+		Props_filter( ): $mol_check_list
+		Filter_props_labeler( ): $mol_labeler
+		Classes_filter( ): $mol_check_list
+		Filter_classes_labeler( ): $mol_labeler
+		Lattices_filter( ): $mol_check_list
+		Filter_lattices_labeler( ): $mol_labeler
 		Filters_page( ): $mol_page
 		search( next?: string ): string
 		suggests( ): readonly(any)[]
@@ -3528,10 +3583,16 @@ declare namespace $ {
 //# sourceMappingURL=search.view.tree.d.ts.map
 declare namespace $.$$ {
     class $optimade_zero_search extends $.$optimade_zero_search {
-        refinement_filter_list(): $mol_button_minor[];
         parsed_query_row(next?: any): string;
         parsed_query(): any;
-        refinement_filters_title(id: any): string;
+        refinement_filter_data(): {
+            [key: string]: {
+                [key: string]: string;
+            };
+        };
+        refinement_filter_options(id: string): {
+            [key: string]: string;
+        };
         filters_query(): [string, unknown][];
         search_filters(): readonly any[];
         search_labeler_title(id: any): string;
@@ -3544,6 +3605,9 @@ declare namespace $.$$ {
         get_description(id: any): string;
         get_image(id: any): string;
     }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
