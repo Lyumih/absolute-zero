@@ -2582,6 +2582,34 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $mol_media extends $mol_object2 {
+        static match(query: string, next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+    function $mol_lights(this: $, next?: boolean): boolean;
+}
+
+declare namespace $ {
+
+	export class $mol_theme_auto extends $mol_plugin {
+		theme( ): string
+		attr( ): ({ 
+			'mol_theme': ReturnType< $mol_theme_auto['theme'] >,
+		}) 
+	}
+	
+}
+
+//# sourceMappingURL=auto.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_theme_auto extends $.$mol_theme_auto {
+        theme(): "$mol_theme_light" | "$mol_theme_dark";
+    }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -3269,14 +3297,103 @@ declare namespace $ {
 }
 
 declare namespace $ {
+}
 
+declare namespace $ {
+
+	export class $mol_check_icon extends $mol_check {
+	}
+	
+}
+
+//# sourceMappingURL=icon.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_brightness_4 extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=4.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_lights_toggle extends $mol_check_icon {
+		Lights_icon( ): $mol_icon_brightness_4
+		lights( next?: boolean ): boolean
+		Icon( ): ReturnType< $mol_lights_toggle['Lights_icon'] >
+		hint( ): string
+		checked( next?: ReturnType< $mol_lights_toggle['lights'] > ): ReturnType< $mol_lights_toggle['lights'] >
+	}
+	
+}
+
+//# sourceMappingURL=toggle.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_lights_toggle extends $.$mol_lights_toggle {
+        lights(next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_icon_script extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=script.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_script_text extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=text.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_link_source extends $mol_link {
+		Icon( ): $mol_icon_script_text
+		hint( ): string
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=source.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_link__uri_azero_app_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_link['uri'] >
+	>
+	type $mol_link__title_azero_app_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_link['title'] >
+	>
+	type $mol_link_source__uri_azero_app_3 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_link_source['uri'] >
+	>
 	export class $azero_app extends $mol_book2_catalog {
+		Logo_link( ): $mol_link
+		Theme( ): $mol_theme_auto
 		Search_page( ): $azero_app_search
-		menu_title( ): string
+		Lights( ): $mol_lights_toggle
+		Sources( ): $mol_link_source
+		Menu_title( ): ReturnType< $azero_app['Logo_link'] >
 		param( ): string
+		plugins( ): readonly(any)[]
 		spreads( ): ({ 
 			'search': ReturnType< $azero_app['Search_page'] >,
 		}) 
+		menu_foot( ): readonly(any)[]
 	}
 	
 }

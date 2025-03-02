@@ -171,6 +171,9 @@
     "$mol_state_arg",
     "$mol_page",
     "$mol_match",
+    "$mol_theme_auto",
+    "$mol_lights",
+    "$mol_media",
     "$azero_app_search",
     "$mol_labeler",
     "$mol_button_major",
@@ -185,7 +188,14 @@
     "$mol_html",
     "$mol_link_iconed",
     "$mol_dom_parse",
-    "$mol_fetch"
+    "$mol_fetch",
+    "$mol_lights_toggle",
+    "$mol_check_icon",
+    "$mol_icon_brightness_4",
+    "$mol_icon_brightness",
+    "$mol_link_source",
+    "$mol_icon_script_text",
+    "$mol_icon_script"
   ],
   "dependencies": {
     "jsdom": "*"
