@@ -1,27 +1,55 @@
 //api.mpds.io/v0/search/selectize?q= - автокомплит
 namespace $.$$ {
 	export class $optimade_zero_search extends $.$optimade_zero_search {
-        refinement_filter_list() {
-            return this.mpds_api().filters()?.payload?.map((_, index) => this.Filter_button(index)) || []
-		}
-
-		@$mol_mem
-		parsed_query_row(next?: any) {
-			return $mol_state_arg.value( 'q', next ? JSON.stringify( $optimade_mpds_nlp.guess( next )): null) ?? ''
-		}
-
-		parsed_query() {
-			const query = JSON.parse( this.parsed_query_row() || '{}' )
-			query.search_type = +this.search_type()
-			return query
-		}
-
-        refinement_filters_title(id: any): string {
-            const data = this.mpds_api()?.filters()?.payload?.[id]
-            return data?.facet + ' ' + data?.count + ': ' + data?.value
+        @$mol_mem
+        parsed_query_row(next?: any) {
+            return $mol_state_arg.value('q', next ? JSON.stringify($optimade_mpds_nlp.guess(next)) : '') ?? ''
         }
 
-		filters_query() {
+        parsed_query() {
+            const query = JSON.parse(this.parsed_query_row() || '{}')
+            query.search_type = +this.search_type()
+            return query
+        }
+
+        @$log
+        refinement_filter_data() {
+            const data = this.mpds_api().filters()?.payload || []
+            return data.reduce(
+                (acc, filter) => ({
+                    ...acc,
+                    [filter.facet as any]: { ...acc[filter.facet as any], [filter.value]: filter.value },
+                    // [ filter.facet as any ]: { [filter.value]:filter.value } ],
+                    // [filter.facet as any]: [...(acc[filter.facet as any] || []), filter],
+                }),
+                {} as { [key: string]: { [key: string]: string } }
+            )
+		}
+		
+		@$log
+		refinement_filter_options(id: string) {
+            return this.refinement_filter_data()[id] || {}
+        }
+
+        // @$log
+        // refinement_filter_list() {
+        //     const data = this.refinement_filter_data()
+        //     return Object.keys(data).map((_, index) => [this.Filter_title(_)]) || []
+        // }
+
+        // refinement_section_list( id: string ) {
+        // 	return this.refinement_filter_data()[id].map((_, index) => this.Filters_button(id))
+        // }
+
+        // refinement_filters_title(id: any): string {
+        //     return id
+        // }
+        // refinement_filters_value(id: any): string {
+        //     const data = this.mpds_api()?.filters()?.payload?.[id]
+        //     return data?.count + ': ' + data?.value
+        // }
+
+        filters_query() {
             return Object.entries(this.parsed_query()) || []
         }
 
@@ -36,25 +64,29 @@ namespace $.$$ {
             return this.parsed_query()[id as 'props']
         }
 
-		clear_search_filter( id: any, next?: any ) {
+        clear_search_filter(id: any, next?: any) {
             const new_query = { ...this.parsed_query() }
             delete new_query[id]
             this.parsed_query_row(new_query)
-		}
+        }
 
-		/** отправить запрос */
-		fetch_search() {
-			this.parsed_query_row(this.search())
+        /** отправить запрос */
+        fetch_search() {
+            this.parsed_query_row(this.search())
         }
 
         suggests(): readonly any[] {
-			const data = this.mpds_api().selectize()
-			return data?.flatMap(d => d.label) || []
+            const data = this.mpds_api().selectize()
+            return data?.flatMap(d => d.label) || []
         }
 
         card_list() {
             if (!this.mpds_api().results()) return []
-            return this.mpds_api().results()?.map((card, index) => this.Card(index)) || []
+            return (
+                this.mpds_api()
+                    .results()
+                    ?.map((card, index) => this.Card(index)) || []
+            )
         }
 
         get_classes(id: any): string {
@@ -67,7 +99,7 @@ namespace $.$$ {
 
         @$mol_mem
         get_image(id: any): string {
-			return this.mpds_api()?.results()?.[id]?.thumbs_link() || ''
+            return this.mpds_api()?.results()?.[id]?.thumbs_link() || ''
         }
     }
 }

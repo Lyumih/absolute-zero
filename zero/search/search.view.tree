@@ -16,9 +16,26 @@ $optimade_zero_search $mol_book2
 							title <= search_labeler_title* \Chemical formulae
 							content /
 								<= Search_labeler_content* $mol_paragraph title <= search_labeler_content* \Формула
-				<= Filters $mol_list rows <= refinement_filter_list /
-					<= Filter_button*0 $mol_button_minor
-						title <= refinement_filters_title* \qwe
+				<= Filter_elements_labeler $mol_labeler
+					title \Chemical elements
+					content /
+						<= Elements_filter $mol_check_list
+							options <= refinement_filter_options*elements *
+				<= Filter_props_labeler $mol_labeler
+					title \Physical properties
+					content /
+						<= Props_filter $mol_check_list
+							options <= refinement_filter_options*props *
+				<= Filter_classes_labeler $mol_labeler
+					title \Materials classes
+					content /
+						<= Classes_filter $mol_check_list
+							options <= refinement_filter_options*classes *
+				<= Filter_lattices_labeler $mol_labeler
+					title \Crystal systems
+					content /
+						<= Lattices_filter $mol_check_list
+							options <= refinement_filter_options*lattices *
 		<= Result_page $mol_page
 			title \Поиск
 			Title null
