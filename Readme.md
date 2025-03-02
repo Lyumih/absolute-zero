@@ -1,3 +1,6 @@
+Absolute Zero is the ultimate form of freezing and the point of cold at which the entropy hit its minimum level. Absolute Zero is also a secret character from a Mortal Kombat universe, related to Sub Zero. Finally, Absolute Zero is the mobile client for the MPDS materials science online database, to be rewritten in the $mol framework, as a part of the new HYOO contest.
+
+
 Ссылки:
 - Стартовый проект Absolute Zero - https://absolute-zero.optimade.science/#start
 - Репозиторий Absolute Zero (fork) - https://github.com/Lyumih/absolute-zero
