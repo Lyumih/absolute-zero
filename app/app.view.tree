@@ -1,5 +1,13 @@
 $azero_app $mol_book2_catalog
-	menu_title \−273.15°C
-	param \p
+	Menu_title <= Logo_link $mol_link
+		uri \
+		title \−273.15°C
+	param \page
+	plugins /
+		<= Theme $mol_theme_auto
 	spreads *
 		search <= Search_page $azero_app_search
+	menu_foot /
+		<= Lights $mol_lights_toggle
+		<= Sources $mol_link_source
+			uri \https://github.com/Lyumih/absolute-zero
