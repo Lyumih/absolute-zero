@@ -3164,17 +3164,22 @@ declare namespace $ {
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_page__Title_azero_app_search_27 = $mol_type_enforce<
+	type $mol_page__title_azero_app_search_27 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_page['title'] >
+	>
+	type $mol_page__Title_azero_app_search_28 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $mol_page['Title'] >
 	>
-	type $mol_page__tools_azero_app_search_28 = $mol_type_enforce<
+	type $mol_page__tools_azero_app_search_29 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['tools'] >
 	>
-	type $mol_page__body_azero_app_search_29 = $mol_type_enforce<
+	type $mol_page__body_azero_app_search_30 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['body'] >
@@ -3213,7 +3218,7 @@ declare namespace $ {
 		card_list( ): readonly(any)[]
 		Row_cards( ): $mol_list
 		Result_page( ): $mol_page
-		title( ): string
+		menu_title( ): string
 		pages( ): readonly(any)[]
 	}
 	

@@ -444,7 +444,7 @@ $mol_html_view_heading $mol_paragraph
 		mol_html_view_heading <= level 1
 
 $azero_app_search $mol_book2
-	title \Поиск
+	menu_title \Поиск
 	pages /
 		<= Filters_page $mol_page
 			title \Фильтры
@@ -461,6 +461,7 @@ $azero_app_search $mol_book2
 					<= Filter_button*0 $mol_button_minor
 						title <= refinement_filters_title* \qwe
 		<= Result_page $mol_page
+			title \Поиск
 			Title null
 			tools /
 				<= Search_row $mol_row sub /

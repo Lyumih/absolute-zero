@@ -8040,12 +8040,13 @@ var $;
 		}
 		Result_page(){
 			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("Поиск");
 			(obj.Title) = () => (null);
 			(obj.tools) = () => ([(this.Search_row()), (this.View_type_row())]);
 			(obj.body) = () => ([(this.Row_cards())]);
 			return obj;
 		}
-		title(){
+		menu_title(){
 			return "Поиск";
 		}
 		pages(){
@@ -8104,7 +8105,6 @@ var $;
                 return this.fetch_refinement().payload;
             }
             refinement_filter_list() {
-                const { payload } = this.fetch_refinement();
                 return this.refinement_data().map((_, index) => this.Filter_button(index));
             }
             refinement_filters_title(id) {
