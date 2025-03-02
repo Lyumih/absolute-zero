@@ -29,7 +29,7 @@ namespace $.$$ {
         }
 
         refinement_filter_list() {
-            const { payload } = this.fetch_refinement()
+            // const { payload } = this.fetch_refinement()
             return this.refinement_data().map((_, index) => this.Filter_button(index))
         }
 
