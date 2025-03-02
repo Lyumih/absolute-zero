@@ -1,5 +1,9 @@
 $azero_app_search $mol_book2
 	menu_title \Поиск
+	parsed_query null
+	mpds_api $azero_app_api
+		search_params <= parsed_query
+		selectize_params? <= search?
 	pages /
 		<= Filters_page $mol_page
 			title \Фильтры
@@ -22,7 +26,7 @@ $azero_app_search $mol_book2
 				<= Search_row $mol_row sub /
 					<= Search $mol_search
 						hint \Type property, elements, classes
-						query? <=> search? \antiferromagnet
+						query? <=> search? \
 						suggests <= suggests /
 					<= Search_button $mol_button_major
 						title \Искать
