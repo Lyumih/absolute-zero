@@ -3281,6 +3281,13 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $optimade_mpds_nlp extends $mol_object {
+        static lib(): any;
+        static guess(text: string): any;
+    }
+}
+
+declare namespace $ {
 
 	type $mol_paragraph__title_optimade_zero_search_1 = $mol_type_enforce<
 		ReturnType< $optimade_zero_search['search_labeler_content'] >
@@ -3491,7 +3498,6 @@ declare namespace $ {
 //# sourceMappingURL=search.view.tree.d.ts.map
 declare namespace $.$$ {
     class $optimade_zero_search extends $.$optimade_zero_search {
-        optimade_nlp(): any;
         refinement_filter_list(): $mol_button_minor[];
         parsed_query_row(next?: any): string;
         parsed_query(): any;

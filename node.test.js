@@ -9360,6 +9360,24 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    class $optimade_mpds_nlp extends $mol_object {
+        static lib() {
+            return $mol_import.script('https://unpkg.com/optimade-mpds-nlp@0.1.7/index.js').OptimadeNLP();
+        }
+        static guess(text) {
+            return this.lib().guess(text);
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $optimade_mpds_nlp, "lib", null);
+    $.$optimade_mpds_nlp = $optimade_mpds_nlp;
+})($ || ($ = {}));
+
+;
+"use strict";
 
 ;
 "use strict";
@@ -9368,14 +9386,11 @@ var $;
     var $$;
     (function ($$) {
         class $optimade_zero_search extends $.$optimade_zero_search {
-            optimade_nlp() {
-                return $mol_import.script('https://unpkg.com/optimade-mpds-nlp@0.1.7/index.js').OptimadeNLP();
-            }
             refinement_filter_list() {
                 return this.mpds_api().filters()?.payload?.map((_, index) => this.Filter_button(index)) || [];
             }
             parsed_query_row(next) {
-                return $mol_state_arg.value('q', next ? JSON.stringify(this.optimade_nlp().guess(next)) : null) ?? '';
+                return $mol_state_arg.value('q', next ? JSON.stringify($optimade_mpds_nlp.guess(next)) : null) ?? '';
             }
             parsed_query() {
                 return JSON.parse(this.parsed_query_row() || '{}');
@@ -9427,9 +9442,6 @@ var $;
                 return this.mpds_api()?.results()?.[id]?.thumbs_link() || '';
             }
         }
-        __decorate([
-            $mol_mem
-        ], $optimade_zero_search.prototype, "optimade_nlp", null);
         __decorate([
             $mol_mem
         ], $optimade_zero_search.prototype, "parsed_query_row", null);

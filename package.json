@@ -210,6 +210,8 @@
     "$mol_wait",
     "$optimade_zero_api_entity",
     "$mol_store",
+    "$optimade_mpds_nlp",
+    "$optimade_mpds",
     "$mol_import",
     "$mol_lights_toggle",
     "$mol_check_icon",
