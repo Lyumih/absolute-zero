@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"sources": [
-		"azero/app/app.view.tree"
-	],
-	"mappings": "AAAA;AAAA;AAAA,AAAA,wBAAW,2BAAX;AAIY,AAAA,kBAAY;AAHvB,AAAA,iBAAY;AACZ,AAAA,YAAO;AACP,AAAA,cAAQ;AAAA,AACP,aAAU,YAJZ,UAIY,iBAAV;AADO;AAHT;AAAA;AAAA;",
-	"file": "app.view.tree.d.ts",
-	"sourceRoot": "../../.."
-}
