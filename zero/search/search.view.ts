@@ -12,42 +12,21 @@ namespace $.$$ {
             return query
         }
 
-        @$log
         refinement_filter_data() {
             const data = this.mpds_api().filters()?.payload || []
             return data.reduce(
                 (acc, filter) => ({
                     ...acc,
                     [filter.facet as any]: { ...acc[filter.facet as any], [filter.value]: filter.value },
-                    // [ filter.facet as any ]: { [filter.value]:filter.value } ],
-                    // [filter.facet as any]: [...(acc[filter.facet as any] || []), filter],
                 }),
                 {} as { [key: string]: { [key: string]: string } }
             )
 		}
-		
-		@$log
+
+		// @$log
 		refinement_filter_options(id: string) {
             return this.refinement_filter_data()[id] || {}
         }
-
-        // @$log
-        // refinement_filter_list() {
-        //     const data = this.refinement_filter_data()
-        //     return Object.keys(data).map((_, index) => [this.Filter_title(_)]) || []
-        // }
-
-        // refinement_section_list( id: string ) {
-        // 	return this.refinement_filter_data()[id].map((_, index) => this.Filters_button(id))
-        // }
-
-        // refinement_filters_title(id: any): string {
-        //     return id
-        // }
-        // refinement_filters_value(id: any): string {
-        //     const data = this.mpds_api()?.filters()?.payload?.[id]
-        //     return data?.count + ': ' + data?.value
-        // }
 
         filters_query() {
             return Object.entries(this.parsed_query()) || []
