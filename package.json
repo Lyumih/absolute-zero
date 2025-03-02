@@ -189,6 +189,8 @@
     "$mol_link_iconed",
     "$mol_dom_parse",
     "$mol_fetch",
+    "$mol_wait_timeout",
+    "$mol_wait",
     "$mol_lights_toggle",
     "$mol_check_icon",
     "$mol_icon_brightness_4",

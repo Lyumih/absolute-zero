@@ -8852,6 +8852,24 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    function $mol_wait_timeout_async(timeout) {
+        const promise = new $mol_promise();
+        const task = new this.$mol_after_timeout(timeout, () => promise.done());
+        return Object.assign(promise, {
+            destructor: () => task.destructor()
+        });
+    }
+    $.$mol_wait_timeout_async = $mol_wait_timeout_async;
+    function $mol_wait_timeout(timeout) {
+        return this.$mol_wire_sync(this).$mol_wait_timeout_async(timeout);
+    }
+    $.$mol_wait_timeout = $mol_wait_timeout;
+})($ || ($ = {}));
+
+;
+"use strict";
 
 ;
 "use strict";
@@ -8913,6 +8931,8 @@ var $;
             }
             fetch_suggests() {
                 if (this.search()) {
+                    this.$.$mol_wait_timeout(1000);
+                    console.log('debounce');
                     const url = 'https://api.mpds.io/v0/search/selectize?q=';
                     const query = this.search();
                     $mol_fetch.json(url + query);
@@ -8955,6 +8975,9 @@ var $;
         __decorate([
             $mol_mem
         ], $azero_app_search.prototype, "fetch_facet", null);
+        __decorate([
+            $mol_mem
+        ], $azero_app_search.prototype, "get_image", null);
         $$.$azero_app_search = $azero_app_search;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -10057,24 +10080,6 @@ var $;
             $.$mol_wait_timeout_async = async function $mol_wait_timeout_async_mock(timeout) { };
         });
     })($$ = $_1.$$ || ($_1.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_wait_timeout_async(timeout) {
-        const promise = new $mol_promise();
-        const task = new this.$mol_after_timeout(timeout, () => promise.done());
-        return Object.assign(promise, {
-            destructor: () => task.destructor()
-        });
-    }
-    $.$mol_wait_timeout_async = $mol_wait_timeout_async;
-    function $mol_wait_timeout(timeout) {
-        return this.$mol_wire_sync(this).$mol_wait_timeout_async(timeout);
-    }
-    $.$mol_wait_timeout = $mol_wait_timeout;
 })($ || ($ = {}));
 
 ;

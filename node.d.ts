@@ -3057,6 +3057,11 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_wait_timeout_async(this: $, timeout: number): Promise<void>;
+    function $mol_wait_timeout(this: $, timeout: number): void;
+}
+
+declare namespace $ {
 
 	type $mol_paragraph__title_azero_app_search_1 = $mol_type_enforce<
 		ReturnType< $azero_app_search['search_labeler_content'] >
