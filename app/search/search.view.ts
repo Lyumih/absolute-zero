@@ -13,8 +13,7 @@ namespace $.$$ {
             )
         }
 
-
-		@$mol_action
+        @$mol_action
         fetch_refinement(next?: any) {
             const query = this.dumb_query()
             const urlRefinement = 'https://api.mpds.io/v0/search/refinement?q='
@@ -24,19 +23,19 @@ namespace $.$$ {
             }
         }
 
-		@$mol_mem
+        @$mol_mem
         refinement_data() {
-			return this.fetch_refinement().payload
-		}
+            return this.fetch_refinement().payload
+        }
 
         refinement_filter_list() {
             const { payload } = this.fetch_refinement()
             return this.refinement_data().map((_, index) => this.Filter_button(index))
         }
 
-		refinement_filters_title( id: any ): string {
-			const {facet, value, count} = this.refinement_data()[id]
-            return facet + ' ' +count + ':' + value
+        refinement_filters_title(id: any): string {
+            const { facet, value, count } = this.refinement_data()[id]
+            return facet + ' ' + count + ':' + value
         }
 
         filters_query() {
@@ -64,7 +63,7 @@ namespace $.$$ {
         fetch_facet(next?: any) {
             const query = this.dumb_query()
             const urlFacet = 'https://api.mpds.io/v0/search/facet?q='
-            return $mol_fetch.json(urlFacet + JSON.stringify(query)) as { out: [string, string][] }
+            return $mol_fetch.json(urlFacet + JSON.stringify(query)) as { out: [string, string, string][] }
         }
 
         fetch_search() {
@@ -97,7 +96,11 @@ namespace $.$$ {
         }
 
         get_classes(id: any): string {
-            return this.fetch_facet()?.out?.[id]?.[1]
+            return `<div>${this.fetch_facet()?.out?.[id]?.[1]}</div>`
+		}
+		
+        get_description(id: any): string {
+            return `<div>${this.fetch_facet()?.out?.[id]?.[2]}</div>`
         }
 
         get_image(id: any): string {

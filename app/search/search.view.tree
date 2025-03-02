@@ -35,7 +35,9 @@ $azero_app_search $mol_book2
 							2 \articles
 			body /
 				<= Row_cards $mol_list rows <= card_list /
-					<= Card*0 $mol_list rows /
+					<= Card*0 $mol_row sub /
 						<= Image* $mol_image
 							uri <= get_image* \
-						<= Classes* $mol_text text <= get_classes* \
+						<= Facet_info* $mol_list rows /
+							<= Classes* $mol_html_view html <= get_classes* \
+							<= Description* $mol_html_view html <= get_description* \
