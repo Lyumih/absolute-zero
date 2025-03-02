@@ -1,17 +1,13 @@
 //api.mpds.io/v0/search/selectize?q= - автокомплит
 namespace $.$$ {
 	export class $optimade_zero_search extends $.$optimade_zero_search {
-		@$mol_mem
-		optimade_nlp() {
-			return $mol_import.script( 'https://unpkg.com/optimade-mpds-nlp@0.1.7/index.js' ).OptimadeNLP()
-		}
         refinement_filter_list() {
             return this.mpds_api().filters()?.payload?.map((_, index) => this.Filter_button(index)) || []
 		}
 
 		@$mol_mem
 		parsed_query_row(next?: any) {
-			return $mol_state_arg.value( 'q', next ? JSON.stringify( this.optimade_nlp().guess( next )): null) ?? ''
+			return $mol_state_arg.value( 'q', next ? JSON.stringify( $optimade_mpds_nlp.guess( next )): null) ?? ''
 		}
 
 		parsed_query() {
