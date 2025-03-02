@@ -67,23 +67,27 @@ namespace $ {
 	
 
     export class $optimade_zero_api extends $mol_object {
-        // @$mol_mem
-        // search_parser_lib() {
-        //     return $mol_import.script('https://unpkg.com/optimade-mpds-nlp@0.1.7/index.js').OptimadeNLP()
-        // }
-
-        // @$mol_mem
-        // search(next?: string) {
-        //     return next ?? ''
-        // }
+        @$mol_mem
+        selectize_params(next?: string) {
+            return next ?? ''
+        }
 
         @$mol_mem
+        selectize() {
+            this.$.$mol_wait_timeout(1000)
+            return this.selectize_params()
+                ? Selectize_response(
+                      $mol_fetch.json(`https://api.mpds.io/v0/search/selectize?q=${this.selectize_params()}`) as any
+                  )
+                : []
+		}
+		
+        @$mol_mem
         search_params(next?: any) {
-            // const facets = this.search_parser_lib().guess(this.search())
-            console.log('search_params', next)
             return Guess_results(next ?? {})
         }
 
+        /** refinement */
         @$mol_mem
         filters() {
             return (
@@ -96,6 +100,7 @@ namespace $ {
             )
         }
 
+		/** facet */
         @$mol_mem
         results_response() {
             return (
@@ -106,26 +111,10 @@ namespace $ {
                     ) as any
                 )
             )
-		}
+        }
 
+		/** facet */
 		@$mol_mem
-		selectize_params(next?: string) {
-			return next ?? ''
-		}
-
-		@$mol_mem
-		selectize() {
-			this.$.$mol_wait_timeout(1000)
-			return (
-                this.selectize_params() ?
-                Selectize_response(
-                    $mol_fetch.json(`https://api.mpds.io/v0/search/selectize?q=${this.selectize_params()}`) as any
-                ) : []
-            )
-		}
-
-        /** facets */
-        @$mol_mem
         results() {
             return this.results_response()?.out?.map(tuple => new $optimade_zero_api_entity(tuple))
         }

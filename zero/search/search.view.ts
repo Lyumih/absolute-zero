@@ -20,7 +20,6 @@ namespace $.$$ {
         }
 
 		filters_query() {
-			console.log(this.parsed_query())
             return Object.entries(this.parsed_query()) || []
         }
 
@@ -36,7 +35,6 @@ namespace $.$$ {
         }
 
 		clear_search_filter( id: any, next?: any ) {
-			console.log('clear_search_filter', id)
             const new_query = { ...this.parsed_query() }
             delete new_query[id]
             this.parsed_query_row(new_query)
@@ -44,13 +42,11 @@ namespace $.$$ {
 
 		/** отправить запрос */
 		fetch_search() {
-			console.log('отправить запрос')
 			this.parsed_query_row(this.search())
         }
 
         suggests(): readonly any[] {
 			const data = this.mpds_api().selectize()
-			console.log('suggets data', data)
 			return data?.flatMap(d => d.label) || []
         }
 
