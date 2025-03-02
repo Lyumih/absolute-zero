@@ -3044,6 +3044,12 @@ declare namespace $ {
         }>;
     };
     class $optimade_zero_api extends $mol_object {
+        selectize_params(next?: string): string;
+        selectize(): readonly Readonly<{
+            facet?: string | undefined;
+            label?: string | undefined;
+            id?: string | undefined;
+        }>[];
         search_params(next?: any): Readonly<{
             formulae?: string | undefined;
             elements?: string | undefined;
@@ -3081,12 +3087,6 @@ declare namespace $ {
             }>[] | undefined;
             error: string | null;
         }>;
-        selectize_params(next?: string): string;
-        selectize(): readonly Readonly<{
-            facet?: string | undefined;
-            label?: string | undefined;
-            id?: string | undefined;
-        }>[];
         results(): $optimade_zero_api_entity[] | undefined;
     }
 }

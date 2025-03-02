@@ -8712,6 +8712,24 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    function $mol_wait_timeout_async(timeout) {
+        const promise = new $mol_promise();
+        const task = new this.$mol_after_timeout(timeout, () => promise.done());
+        return Object.assign(promise, {
+            destructor: () => task.destructor()
+        });
+    }
+    $.$mol_wait_timeout_async = $mol_wait_timeout_async;
+    function $mol_wait_timeout(timeout) {
+        return this.$mol_wire_sync(this).$mol_wait_timeout_async(timeout);
+    }
+    $.$mol_wait_timeout = $mol_wait_timeout;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_fetch_response extends $mol_object2 {
         native;
         constructor(native) {
@@ -8868,24 +8886,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    function $mol_wait_timeout_async(timeout) {
-        const promise = new $mol_promise();
-        const task = new this.$mol_after_timeout(timeout, () => promise.done());
-        return Object.assign(promise, {
-            destructor: () => task.destructor()
-        });
-    }
-    $.$mol_wait_timeout_async = $mol_wait_timeout_async;
-    function $mol_wait_timeout(timeout) {
-        return this.$mol_wire_sync(this).$mol_wait_timeout_async(timeout);
-    }
-    $.$mol_wait_timeout = $mol_wait_timeout;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
     const Rec = $mol_data_record;
     const Str = $mol_data_string;
     const Maybe = $mol_data_optional;
@@ -8940,8 +8940,16 @@ var $;
         out: Maybe(Arr($.$optimade_zero_api_entry)),
     });
     class $optimade_zero_api extends $mol_object {
+        selectize_params(next) {
+            return next ?? '';
+        }
+        selectize() {
+            this.$.$mol_wait_timeout(1000);
+            return this.selectize_params()
+                ? Selectize_response($mol_fetch.json(`https://api.mpds.io/v0/search/selectize?q=${this.selectize_params()}`))
+                : [];
+        }
         search_params(next) {
-            console.log('search_params', next);
             return Guess_results(next ?? {});
         }
         filters() {
@@ -8952,18 +8960,16 @@ var $;
             return (this.search_params() &&
                 Facet_response($mol_fetch.json(`https://api.mpds.io/v0/search/facet?q=${JSON.stringify(this.search_params())}`)));
         }
-        selectize_params(next) {
-            return next ?? '';
-        }
-        selectize() {
-            this.$.$mol_wait_timeout(1000);
-            return (this.selectize_params() ?
-                Selectize_response($mol_fetch.json(`https://api.mpds.io/v0/search/selectize?q=${this.selectize_params()}`)) : []);
-        }
         results() {
             return this.results_response()?.out?.map(tuple => new $optimade_zero_api_entity(tuple));
         }
     }
+    __decorate([
+        $mol_mem
+    ], $optimade_zero_api.prototype, "selectize_params", null);
+    __decorate([
+        $mol_mem
+    ], $optimade_zero_api.prototype, "selectize", null);
     __decorate([
         $mol_mem
     ], $optimade_zero_api.prototype, "search_params", null);
@@ -8973,12 +8979,6 @@ var $;
     __decorate([
         $mol_mem
     ], $optimade_zero_api.prototype, "results_response", null);
-    __decorate([
-        $mol_mem
-    ], $optimade_zero_api.prototype, "selectize_params", null);
-    __decorate([
-        $mol_mem
-    ], $optimade_zero_api.prototype, "selectize", null);
     __decorate([
         $mol_mem
     ], $optimade_zero_api.prototype, "results", null);
@@ -9409,7 +9409,6 @@ var $;
                 return data?.facet + ' ' + data?.count + ':' + data?.value;
             }
             filters_query() {
-                console.log(this.parsed_query());
                 return Object.entries(this.parsed_query()) || [];
             }
             search_filters() {
@@ -9422,18 +9421,15 @@ var $;
                 return this.parsed_query()[id];
             }
             clear_search_filter(id, next) {
-                console.log('clear_search_filter', id);
                 const new_query = { ...this.parsed_query() };
                 delete new_query[id];
                 this.parsed_query_row(new_query);
             }
             fetch_search() {
-                console.log('отправить запрос');
                 this.parsed_query_row(this.search());
             }
             suggests() {
                 const data = this.mpds_api().selectize();
-                console.log('suggets data', data);
                 return data?.flatMap(d => d.label) || [];
             }
             card_list() {

@@ -3105,6 +3105,11 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_wait_timeout_async(this: $, timeout: number): Promise<void>;
+    function $mol_wait_timeout(this: $, timeout: number): void;
+}
+
+declare namespace $ {
     class $mol_fetch_response extends $mol_object2 {
         readonly native: Response;
         constructor(native: Response);
@@ -3137,11 +3142,6 @@ declare namespace $ {
         static xhtml(input: RequestInfo, init?: RequestInit): Document;
         static html(input: RequestInfo, init?: RequestInit): Document;
     }
-}
-
-declare namespace $ {
-    function $mol_wait_timeout_async(this: $, timeout: number): Promise<void>;
-    function $mol_wait_timeout(this: $, timeout: number): void;
 }
 
 declare namespace $ {
@@ -3186,6 +3186,12 @@ declare namespace $ {
         }>;
     };
     class $optimade_zero_api extends $mol_object {
+        selectize_params(next?: string): string;
+        selectize(): readonly Readonly<{
+            facet?: string | undefined;
+            id?: string | undefined;
+            label?: string | undefined;
+        }>[];
         search_params(next?: any): Readonly<{
             formulae?: string | undefined;
             elements?: string | undefined;
@@ -3223,12 +3229,6 @@ declare namespace $ {
             }>[] | undefined;
             error: string | null;
         }>;
-        selectize_params(next?: string): string;
-        selectize(): readonly Readonly<{
-            facet?: string | undefined;
-            id?: string | undefined;
-            label?: string | undefined;
-        }>[];
         results(): $optimade_zero_api_entity[] | undefined;
     }
 }
