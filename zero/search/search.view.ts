@@ -1,6 +1,6 @@
 //api.mpds.io/v0/search/selectize?q= - автокомплит
 namespace $.$$ {
-	export class $azero_app_search extends $.$azero_app_search {
+	export class $optimade_zero_search extends $.$optimade_zero_search {
 		@$mol_mem
 		optimade_nlp() {
 			return $mol_import.script( 'https://unpkg.com/optimade-mpds-nlp@0.1.7/index.js' ).OptimadeNLP()

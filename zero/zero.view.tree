@@ -1,4 +1,4 @@
-$azero_app $mol_book2_catalog
+$optimade_zero $mol_book2_catalog
 	Menu_title <= Logo_link $mol_link
 		uri \
 		title \−273.15°C
@@ -6,7 +6,7 @@ $azero_app $mol_book2_catalog
 	plugins /
 		<= Theme $mol_theme_auto
 	spreads *
-		search <= Search_page $azero_app_search
+		search <= Search_page $optimade_zero_search
 	menu_foot /
 		<= Lights $mol_lights_toggle
 		<= Sources $mol_link_source

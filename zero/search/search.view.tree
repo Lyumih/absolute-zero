@@ -1,7 +1,7 @@
-$azero_app_search $mol_book2
+$optimade_zero_search $mol_book2
 	menu_title \Поиск
 	parsed_query null
-	mpds_api $azero_app_api
+	mpds_api $optimade_zero_api
 		search_params <= parsed_query
 		selectize_params? <= search?
 	pages /

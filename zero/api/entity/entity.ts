@@ -1,5 +1,5 @@
 namespace $ {
-    export class $azero_app_api_entity extends $mol_store<typeof $azero_app_api_entry.Value> {
+    export class $optimade_zero_api_entity extends $mol_store<typeof $optimade_zero_api_entry.Value> {
         cdn_uri() {
             return 'https://mpds.io'
         }

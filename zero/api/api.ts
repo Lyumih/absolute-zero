@@ -46,7 +46,7 @@ namespace $ {
 		id: Maybe( Str ),
 	}))
 
-    export const $azero_app_api_entry = Rec({
+    export const $optimade_zero_api_entry = Rec({
         0: Str, // Entry
         1: Str, // Formula
         2: Str, // Property
@@ -62,11 +62,11 @@ namespace $ {
         fuzzy_notice: Maybe(Nully(Str)),
         notice: Maybe(Str),
         estimated_count: Maybe(Int),
-        out: Maybe(Arr($azero_app_api_entry)),
+        out: Maybe(Arr($optimade_zero_api_entry)),
     })
 	
 
-    export class $azero_app_api extends $mol_object {
+    export class $optimade_zero_api extends $mol_object {
         // @$mol_mem
         // search_parser_lib() {
         //     return $mol_import.script('https://unpkg.com/optimade-mpds-nlp@0.1.7/index.js').OptimadeNLP()
@@ -127,7 +127,7 @@ namespace $ {
         /** facets */
         @$mol_mem
         results() {
-            return this.results_response()?.out?.map(tuple => new $azero_app_api_entity(tuple))
+            return this.results_response()?.out?.map(tuple => new $optimade_zero_api_entity(tuple))
         }
     }
 }
