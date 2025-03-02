@@ -11,12 +11,14 @@ namespace $.$$ {
 		}
 
 		parsed_query() {
-			return JSON.parse(this.parsed_query_row() || '{}')
+			const query = JSON.parse( this.parsed_query_row() || '{}' )
+			query.search_type = +this.search_type()
+			return query
 		}
 
         refinement_filters_title(id: any): string {
             const data = this.mpds_api()?.filters()?.payload?.[id]
-            return data?.facet + ' ' + data?.count + ':' + data?.value
+            return data?.facet + ' ' + data?.count + ': ' + data?.value
         }
 
 		filters_query() {

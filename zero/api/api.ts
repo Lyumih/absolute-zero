@@ -47,14 +47,14 @@ namespace $ {
 	}))
 
     export const $optimade_zero_api_entry = Rec({
-        0: Str, // Entry
+        0: Vary(Str, Int), // Entry
         1: Str, // Formula
-        2: Str, // Property
-        3: Int,
-        4: Bool, // Is public data
-        5: Str, // Biblio id?
-        6: Int, // Year
-        7: Int, // Ref id
+        2: Vary(Str, Int), // Property
+        3: Vary(Str,Int),
+        4: Vary(Bool, Int), // Is public data
+        5: Maybe(Str), // Biblio id?
+        6: Maybe(Int), // Year
+        7: Maybe(Int), // Ref id
     })
 
     const Facet_response = Rec({

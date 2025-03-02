@@ -13,11 +13,11 @@ namespace $ {
         }
 
         id_prefix() {
-            return this.value(0).split('-')[0]
+            return (this.value(0) as string)?.split('-')?.[0]
         }
 
         type() {
-            return this.id()[0]
+            return (this.id()as string)?.[0] || ''
         }
 
         formula_html() {
@@ -30,7 +30,7 @@ namespace $ {
 
         data_type() {
             if (this.value(3) === 7) return 'ml_data'
-            if ([8, 9, 10, 11].includes(this.value(3))) return 'ab_data'
+            if ([8, 9, 10, 11].includes(this.value(3) as number)) return 'ab_data'
             return ''
         }
 
