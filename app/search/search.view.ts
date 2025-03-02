@@ -74,7 +74,9 @@ namespace $.$$ {
         }
 
         fetch_suggests() {
-            if (this.search()) {
+			if( this.search() ) {
+				this.$.$mol_wait_timeout( 1000 )
+				console.log('debounce')
                 const url = 'https://api.mpds.io/v0/search/selectize?q='
                 const query = this.search()
                 $mol_fetch.json(url + query)
@@ -103,6 +105,7 @@ namespace $.$$ {
             return `<div>${this.fetch_facet()?.out?.[id]?.[2]}</div>`
         }
 
+		@$mol_mem
         get_image(id: any): string {
             const image_name = this.fetch_facet()?.out?.[id]?.[0]
             const category = image_name.startsWith('C') ? 'pd' : 'rd'
