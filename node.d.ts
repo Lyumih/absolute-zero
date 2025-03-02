@@ -413,7 +413,7 @@ declare namespace $ {
         static getter<Host, Args extends readonly unknown[], Result>(task: (this: Host, ...args: Args) => Result): (host: Host, args: Args) => $mol_wire_task<Host, Args, Result>;
         get temp(): boolean;
         complete(): void;
-        put(next: Result | Error | Promise<Result | Error>): Result | Error | Promise<Result | Error>;
+        put(next: Result | Error | Promise<Result | Error>): Error | Result | Promise<Error | Result>;
     }
 }
 
@@ -3022,6 +3022,89 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    type $mol_data_value<Input = any, Output = any> = (val: Input) => Output;
+}
+
+declare namespace $ {
+    type $mol_type_partial_undefined<Val> = $mol_type_merge<$mol_type_override<Partial<Val>, Pick<Val, {
+        [Field in keyof Val]: undefined extends Val[Field] ? never : Field;
+    }[keyof Val]>>>;
+}
+
+declare namespace $ {
+    function $mol_data_setup<Value extends $mol_data_value, Config = never>(value: Value, config: Config): Value & {
+        config: Config;
+        Value: ReturnType<Value>;
+    };
+}
+
+declare namespace $ {
+    function $mol_data_record<Sub extends Record<string, $mol_data_value>>(sub: Sub): ((val: $mol_type_merge<$mol_type_override<Partial<{ [key in keyof Sub]: Parameters<Sub[key]>[0]; }>, Pick<{ [key in keyof Sub]: Parameters<Sub[key]>[0]; }, { [Field in keyof { [key in keyof Sub]: Parameters<Sub[key]>[0]; }]: undefined extends { [key in keyof Sub]: Parameters<Sub[key]>[0]; }[Field] ? never : Field; }[keyof Sub]>>>) => Readonly<$mol_type_merge<$mol_type_override<Partial<{ [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }>, Pick<{ [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }, { [Field_1 in keyof { [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }]: undefined extends { [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }[Field_1] ? never : Field_1; }[keyof Sub]>>>>) & {
+        config: Sub;
+        Value: Readonly<$mol_type_merge<$mol_type_override<Partial<{ [key in keyof Sub]: ReturnType<Sub[key]>; }>, Pick<{ [key in keyof Sub]: ReturnType<Sub[key]>; }, { [Field in keyof { [key in keyof Sub]: ReturnType<Sub[key]>; }]: undefined extends { [key in keyof Sub]: ReturnType<Sub[key]>; }[Field] ? never : Field; }[keyof Sub]>>>>;
+    };
+}
+
+declare namespace $ {
+    class $mol_data_error extends $mol_error_mix {
+    }
+}
+
+declare namespace $ {
+    let $mol_data_string: (val: string) => string;
+}
+
+declare namespace $ {
+    function $mol_data_optional<Sub extends $mol_data_value, Fallback extends undefined | (() => ReturnType<Sub>)>(sub: Sub, fallback?: Fallback): ((val: Parameters<Sub>[0] | undefined) => ReturnType<Sub> | (Fallback extends undefined ? undefined : ReturnType<Extract<Fallback, () => any>>)) & {
+        config: {
+            sub: Sub;
+            fallback: Fallback | undefined;
+        };
+        Value: ReturnType<Sub> | (Fallback extends undefined ? undefined : ReturnType<Extract<Fallback, () => any>>);
+    };
+}
+
+declare namespace $ {
+    function $mol_data_variant<Sub extends $mol_data_value[]>(...sub: Sub): ((val: Parameters<Sub[number]>[0]) => ReturnType<Sub[number]>) & {
+        config: Sub;
+        Value: ReturnType<Sub[number]>;
+    };
+}
+
+declare namespace $ {
+    function $mol_data_nullable<Sub extends $mol_data_value>(sub: Sub): ((val: Parameters<Sub>[0] | null) => ReturnType<Sub> | null) & {
+        config: Sub;
+        Value: ReturnType<Sub> | null;
+    };
+}
+
+declare namespace $ {
+    function $mol_data_array<Sub extends $mol_data_value>(sub: Sub): ((val: readonly Parameters<Sub>[0][]) => readonly ReturnType<Sub>[]) & {
+        config: Sub;
+        Value: readonly ReturnType<Sub>[];
+    };
+}
+
+declare namespace $ {
+    let $mol_data_number: (val: number) => number;
+}
+
+declare namespace $ {
+    function $mol_data_integer(val: number): number;
+}
+
+declare namespace $ {
+    function $mol_data_const<Val>(ref: Val): ((val: Val) => Val) & {
+        config: Val;
+        Value: Val;
+    };
+}
+
+declare namespace $ {
+    let $mol_data_boolean: (val: boolean) => boolean;
+}
+
+declare namespace $ {
     class $mol_fetch_response extends $mol_object2 {
         readonly native: Response;
         constructor(native: Response);
@@ -3059,6 +3142,142 @@ declare namespace $ {
 declare namespace $ {
     function $mol_wait_timeout_async(this: $, timeout: number): Promise<void>;
     function $mol_wait_timeout(this: $, timeout: number): void;
+}
+
+declare namespace $ {
+    const $azero_app_api_entry: ((val: {
+        0: string;
+        1: string;
+        2: string;
+        3: number;
+        4: boolean;
+        5: string;
+        6: number;
+        7: number;
+    }) => Readonly<{
+        0: string;
+        1: string;
+        2: string;
+        3: number;
+        4: boolean;
+        5: string;
+        6: number;
+        7: number;
+    }>) & {
+        config: {
+            0: (val: string) => string;
+            1: (val: string) => string;
+            2: (val: string) => string;
+            3: typeof $mol_data_integer;
+            4: (val: boolean) => boolean;
+            5: (val: string) => string;
+            6: typeof $mol_data_integer;
+            7: typeof $mol_data_integer;
+        };
+        Value: Readonly<{
+            0: string;
+            1: string;
+            2: string;
+            3: number;
+            4: boolean;
+            5: string;
+            6: number;
+            7: number;
+        }>;
+    };
+    class $azero_app_api extends $mol_object {
+        search_params(next?: any): Readonly<{
+            formulae?: string | undefined;
+            elements?: string | undefined;
+            props?: string | undefined;
+            classes?: string | undefined;
+            numeric?: readonly Readonly<{
+                2?: number | undefined;
+                0: string;
+                1: string;
+            }>[] | undefined;
+            ignored: readonly string[];
+        }>;
+        filters(): Readonly<{
+            total_count?: number | undefined;
+            payload?: readonly Readonly<{
+                facet: string;
+                value: string;
+                count: number;
+            }>[] | undefined;
+            error: string | null;
+        }>;
+        results_response(): Readonly<{
+            fuzzy_notice?: string | null | undefined;
+            notice?: string | undefined;
+            estimated_count?: number | undefined;
+            out?: readonly Readonly<{
+                0: string;
+                1: string;
+                2: string;
+                3: number;
+                4: boolean;
+                5: string;
+                6: number;
+                7: number;
+            }>[] | undefined;
+            error: string | null;
+        }>;
+        selectize_params(next?: string): string;
+        selectize(): readonly Readonly<{
+            facet?: string | undefined;
+            id?: string | undefined;
+            label?: string | undefined;
+        }>[];
+        results(): $azero_app_api_entity[] | undefined;
+    }
+}
+
+declare namespace $ {
+    class $mol_store<Data> extends $mol_object2 {
+        data_default?: Data | undefined;
+        constructor(data_default?: Data | undefined);
+        data(next?: Data): NonNullable<Data> | (Data & null);
+        snapshot(next?: string): string;
+        value<Key extends keyof Data>(key: Key, next?: Data[Key]): Data[Key] & {};
+        selection<Key extends keyof Data>(key: Key, next?: number[]): number[];
+        sub<Key extends keyof Data, Lens extends $mol_store<Data[Key]> = $mol_store<NonNullable<Data[Key]>>>(key: Key, lens?: Lens): Lens;
+        reset(): void;
+        active(): boolean;
+    }
+}
+
+declare namespace $ {
+    class $azero_app_api_entity extends $mol_store<typeof $azero_app_api_entry.Value> {
+        cdn_uri(): string;
+        api_uri(): string;
+        id(): string;
+        id_prefix(): string;
+        type(): string;
+        formula_html(): string;
+        property(): string;
+        data_type(): "" | "ml_data" | "ab_data";
+        is_public(): boolean;
+        bib_id(): string | 0;
+        year(): number;
+        ref_id(): number;
+        thumbs_link(): string;
+        ref_link(): string;
+        pdf_link(): string;
+        png_link(): string;
+        gif_link(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_import extends $mol_object2 {
+        static module(uri: string): any;
+        static module_async(uri: string): Promise<any>;
+        static script(uri: string): any;
+        static script_async(uri: string): Promise<any>;
+        static style(uri: string): any;
+        static style_async(uri: string): any;
+    }
 }
 
 declare namespace $ {
@@ -3217,6 +3436,16 @@ declare namespace $ {
 		,
 		ReturnType< $mol_page['body'] >
 	>
+	type $azero_app_api__search_params_azero_app_search_31 = $mol_type_enforce<
+		ReturnType< $azero_app_search['parsed_query'] >
+		,
+		ReturnType< $azero_app_api['search_params'] >
+	>
+	type $azero_app_api__selectize_params_azero_app_search_32 = $mol_type_enforce<
+		ReturnType< $azero_app_search['search'] >
+		,
+		ReturnType< $azero_app_api['selectize_params'] >
+	>
 	export class $azero_app_search extends $mol_book2 {
 		clear_search_filter( id: any, next?: any ): any
 		search_labeler_title( id: any): string
@@ -3252,6 +3481,8 @@ declare namespace $ {
 		Row_cards( ): $mol_list
 		Result_page( ): $mol_page
 		menu_title( ): string
+		parsed_query( ): any
+		mpds_api( ): $azero_app_api
 		pages( ): readonly(any)[]
 	}
 	
@@ -3260,36 +3491,17 @@ declare namespace $ {
 //# sourceMappingURL=search.view.tree.d.ts.map
 declare namespace $.$$ {
     class $azero_app_search extends $.$azero_app_search {
-        dumb_query(next?: any): any;
-        fetch_refinement(next?: any): {
-            error: null;
-            payload: {
-                facet: string;
-                value: string;
-                count: number;
-            }[];
-        };
-        refinement_data(): {
-            facet: string;
-            value: string;
-            count: number;
-        }[];
+        optimade_nlp(): any;
         refinement_filter_list(): $mol_button_minor[];
+        parsed_query_row(next?: any): string;
+        parsed_query(): any;
         refinement_filters_title(id: any): string;
         filters_query(): [string, unknown][];
         search_filters(): readonly any[];
         search_labeler_title(id: any): string;
         search_labeler_content(id: any): string;
         clear_search_filter(id: any, next?: any): void;
-        fetch_facet(next?: any): {
-            out: [string, string, string][];
-        };
         fetch_search(): void;
-        fetch_suggests(): {
-            facet: string;
-            label: string;
-            id: string;
-        }[] | undefined;
         suggests(): readonly any[];
         card_list(): $mol_row[];
         get_classes(id: any): string;

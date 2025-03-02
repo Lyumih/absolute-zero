@@ -8505,194 +8505,199 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$azero_app_search) = class $azero_app_search extends ($.$mol_book2) {
-		clear_search_filter(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		search_labeler_title(id){
-			return "Chemical formulae";
-		}
-		search_labeler_content(id){
-			return "Формула";
-		}
-		Search_labeler_content(id){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.search_labeler_content(id)));
-			return obj;
-		}
-		Search_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.search_labeler_title(id)));
-			(obj.content) = () => ([(this.Search_labeler_content(id))]);
-			return obj;
-		}
-		Search_filter(id){
-			const obj = new this.$.$mol_button_major();
-			(obj.hint) = () => ("Убрать");
-			(obj.click) = (next) => ((this.clear_search_filter(id, next)));
-			(obj.sub) = () => ([(this.Search_labeler(id))]);
-			return obj;
-		}
-		search_filters(){
-			return [(this.Search_filter("0"))];
-		}
-		Search_filters(){
-			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ((this.search_filters()));
-			return obj;
-		}
-		refinement_filters_title(id){
-			return "qwe";
-		}
-		Filter_button(id){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.refinement_filters_title(id)));
-			return obj;
-		}
-		refinement_filter_list(){
-			return [(this.Filter_button("0"))];
-		}
-		Filters(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.refinement_filter_list()));
-			return obj;
-		}
-		Filters_page(){
-			const obj = new this.$.$mol_page();
-			(obj.title) = () => ("Фильтры");
-			(obj.body) = () => ([(this.Search_filters()), (this.Filters())]);
-			return obj;
-		}
-		search(next){
-			if(next !== undefined) return next;
-			return "antiferromagnet";
-		}
-		suggests(){
-			return [];
-		}
-		Search(){
-			const obj = new this.$.$mol_search();
-			(obj.hint) = () => ("Type property, elements, classes");
-			(obj.query) = (next) => ((this.search(next)));
-			(obj.suggests) = () => ((this.suggests()));
-			return obj;
-		}
-		fetch_search(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Search_button(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Искать");
-			(obj.click) = (next) => ((this.fetch_search(next)));
-			return obj;
-		}
-		Search_row(){
-			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ([(this.Search()), (this.Search_button())]);
-			return obj;
-		}
-		search_type(next){
-			if(next !== undefined) return next;
-			return "0";
-		}
-		View_type_switch(){
-			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.search_type(next)));
-			(obj.options) = () => ({
-				"0": "entires", 
-				"1": "phases", 
-				"2": "articles"
-			});
-			return obj;
-		}
-		View_type_row(){
-			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ([(this.View_type_switch())]);
-			return obj;
-		}
-		get_image(id){
-			return "";
-		}
-		Image(id){
-			const obj = new this.$.$mol_image();
-			(obj.uri) = () => ((this.get_image(id)));
-			return obj;
-		}
-		get_classes(id){
-			return "";
-		}
-		Classes(id){
-			const obj = new this.$.$mol_html_view();
-			(obj.html) = () => ((this.get_classes(id)));
-			return obj;
-		}
-		get_description(id){
-			return "";
-		}
-		Description(id){
-			const obj = new this.$.$mol_html_view();
-			(obj.html) = () => ((this.get_description(id)));
-			return obj;
-		}
-		Facet_info(id){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ([(this.Classes(id)), (this.Description(id))]);
-			return obj;
-		}
-		Card(id){
-			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ([(this.Image(id)), (this.Facet_info(id))]);
-			return obj;
-		}
-		card_list(){
-			return [(this.Card("0"))];
-		}
-		Row_cards(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.card_list()));
-			return obj;
-		}
-		Result_page(){
-			const obj = new this.$.$mol_page();
-			(obj.title) = () => ("Поиск");
-			(obj.Title) = () => (null);
-			(obj.tools) = () => ([(this.Search_row()), (this.View_type_row())]);
-			(obj.body) = () => ([(this.Row_cards())]);
-			return obj;
-		}
-		menu_title(){
-			return "Поиск";
-		}
-		pages(){
-			return [(this.Filters_page()), (this.Result_page())];
-		}
-	};
-	($mol_mem_key(($.$azero_app_search.prototype), "clear_search_filter"));
-	($mol_mem_key(($.$azero_app_search.prototype), "Search_labeler_content"));
-	($mol_mem_key(($.$azero_app_search.prototype), "Search_labeler"));
-	($mol_mem_key(($.$azero_app_search.prototype), "Search_filter"));
-	($mol_mem(($.$azero_app_search.prototype), "Search_filters"));
-	($mol_mem_key(($.$azero_app_search.prototype), "Filter_button"));
-	($mol_mem(($.$azero_app_search.prototype), "Filters"));
-	($mol_mem(($.$azero_app_search.prototype), "Filters_page"));
-	($mol_mem(($.$azero_app_search.prototype), "search"));
-	($mol_mem(($.$azero_app_search.prototype), "Search"));
-	($mol_mem(($.$azero_app_search.prototype), "fetch_search"));
-	($mol_mem(($.$azero_app_search.prototype), "Search_button"));
-	($mol_mem(($.$azero_app_search.prototype), "Search_row"));
-	($mol_mem(($.$azero_app_search.prototype), "search_type"));
-	($mol_mem(($.$azero_app_search.prototype), "View_type_switch"));
-	($mol_mem(($.$azero_app_search.prototype), "View_type_row"));
-	($mol_mem_key(($.$azero_app_search.prototype), "Image"));
-	($mol_mem_key(($.$azero_app_search.prototype), "Classes"));
-	($mol_mem_key(($.$azero_app_search.prototype), "Description"));
-	($mol_mem_key(($.$azero_app_search.prototype), "Facet_info"));
-	($mol_mem_key(($.$azero_app_search.prototype), "Card"));
-	($mol_mem(($.$azero_app_search.prototype), "Row_cards"));
-	($mol_mem(($.$azero_app_search.prototype), "Result_page"));
+"use strict";
 
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_data_setup(value, config) {
+        return Object.assign(value, {
+            config,
+            Value: null
+        });
+    }
+    $.$mol_data_setup = $mol_data_setup;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_data_record(sub) {
+        return $mol_data_setup((val) => {
+            let res = {};
+            for (const field in sub) {
+                try {
+                    res[field] =
+                        sub[field](val[field]);
+                }
+                catch (error) {
+                    if (error instanceof Promise)
+                        return $mol_fail_hidden(error);
+                    error.message = `[${JSON.stringify(field)}] ${error.message}`;
+                    return $mol_fail(error);
+                }
+            }
+            return res;
+        }, sub);
+    }
+    $.$mol_data_record = $mol_data_record;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_data_error extends $mol_error_mix {
+    }
+    $.$mol_data_error = $mol_data_error;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_data_string = (val) => {
+        if (typeof val === 'string')
+            return val;
+        return $mol_fail(new $mol_data_error(`${val} is not a string`));
+    };
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_data_optional(sub, fallback) {
+        return $mol_data_setup((val) => {
+            if (val === undefined) {
+                return fallback?.();
+            }
+            return sub(val);
+        }, { sub, fallback });
+    }
+    $.$mol_data_optional = $mol_data_optional;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_data_variant(...sub) {
+        return $mol_data_setup((val) => {
+            const errors = [];
+            for (const type of sub) {
+                let hidden = $.$mol_fail_hidden;
+                try {
+                    $.$mol_fail = $.$mol_fail_hidden;
+                    return type(val);
+                }
+                catch (error) {
+                    $.$mol_fail = hidden;
+                    if (error instanceof $mol_data_error) {
+                        errors.push(error);
+                    }
+                    else {
+                        return $mol_fail_hidden(error);
+                    }
+                }
+            }
+            return $mol_fail(new $mol_data_error(`${val} is not any of variants`, {}, ...errors));
+        }, sub);
+    }
+    $.$mol_data_variant = $mol_data_variant;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_data_nullable(sub) {
+        return $mol_data_setup((val) => {
+            if (val === null)
+                return null;
+            return sub(val);
+        }, sub);
+    }
+    $.$mol_data_nullable = $mol_data_nullable;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_data_array(sub) {
+        return $mol_data_setup((val) => {
+            if (!Array.isArray(val))
+                return $mol_fail(new $mol_data_error(`${val} is not an array`));
+            return val.map((item, index) => {
+                try {
+                    return sub(item);
+                }
+                catch (error) {
+                    if (error instanceof Promise)
+                        return $mol_fail_hidden(error);
+                    error.message = `[${index}] ${error.message}`;
+                    return $mol_fail(error);
+                }
+            });
+        }, sub);
+    }
+    $.$mol_data_array = $mol_data_array;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_data_number = (val) => {
+        if (typeof val === 'number')
+            return val;
+        return $mol_fail(new $mol_data_error(`${val} is not a number`));
+    };
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_data_integer(val) {
+        const val2 = $mol_data_number(val);
+        if (Math.floor(val2) === val2)
+            return val2;
+        return $mol_fail(new $mol_data_error(`${val} is not an integer`));
+    }
+    $.$mol_data_integer = $mol_data_integer;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_data_const(ref) {
+        return $mol_data_setup((val) => {
+            if ($mol_compare_deep(val, ref))
+                return ref;
+            return $mol_fail(new $mol_data_error(`${JSON.stringify(val)} is not ${JSON.stringify(ref)}`));
+        }, ref);
+    }
+    $.$mol_data_const = $mol_data_const;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_data_boolean = (val) => {
+        if (typeof val === 'boolean')
+            return val;
+        return $mol_fail(new $mol_data_error(`${val} is not a boolean`));
+    };
+})($ || ($ = {}));
 
 ;
 "use strict";
@@ -8870,6 +8875,491 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    const Rec = $mol_data_record;
+    const Str = $mol_data_string;
+    const Maybe = $mol_data_optional;
+    const Vary = $mol_data_variant;
+    const Nully = $mol_data_nullable;
+    const Arr = $mol_data_array;
+    const Num = $mol_data_number;
+    const Int = $mol_data_integer;
+    const Const = $mol_data_const;
+    const Bool = $mol_data_boolean;
+    const Guess_results = Rec({
+        formulae: Maybe(Str),
+        elements: Maybe(Str),
+        props: Maybe(Str),
+        classes: Maybe(Str),
+        numeric: Maybe(Arr(Rec({
+            0: Str,
+            1: Str,
+            2: Maybe(Num),
+        }))),
+        ignored: Arr(Str),
+    });
+    const Refinement_response = Rec({
+        error: Nully(Str),
+        total_count: Maybe(Int),
+        payload: Maybe(Arr(Rec({
+            facet: Vary(Const('elements'), Const('props'), Const('classes'), Const('lattices')),
+            value: Str,
+            count: Int,
+        }))),
+    });
+    const Selectize_response = Arr(Rec({
+        facet: Maybe(Str),
+        label: Maybe(Str),
+        id: Maybe(Str),
+    }));
+    $.$azero_app_api_entry = Rec({
+        0: Str,
+        1: Str,
+        2: Str,
+        3: Int,
+        4: Bool,
+        5: Str,
+        6: Int,
+        7: Int,
+    });
+    const Facet_response = Rec({
+        error: Nully(Str),
+        fuzzy_notice: Maybe(Nully(Str)),
+        notice: Maybe(Str),
+        estimated_count: Maybe(Int),
+        out: Maybe(Arr($.$azero_app_api_entry)),
+    });
+    class $azero_app_api extends $mol_object {
+        search_params(next) {
+            console.log('search_params', next);
+            return Guess_results(next ?? {});
+        }
+        filters() {
+            return (this.search_params() &&
+                Refinement_response($mol_fetch.json(`https://api.mpds.io/v0/search/refinement?q=${JSON.stringify(this.search_params())}`)));
+        }
+        results_response() {
+            return (this.search_params() &&
+                Facet_response($mol_fetch.json(`https://api.mpds.io/v0/search/facet?q=${JSON.stringify(this.search_params())}`)));
+        }
+        selectize_params(next) {
+            return next ?? '';
+        }
+        selectize() {
+            this.$.$mol_wait_timeout(1000);
+            return (this.selectize_params() ?
+                Selectize_response($mol_fetch.json(`https://api.mpds.io/v0/search/selectize?q=${this.selectize_params()}`)) : []);
+        }
+        results() {
+            return this.results_response()?.out?.map(tuple => new $azero_app_api_entity(tuple));
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $azero_app_api.prototype, "search_params", null);
+    __decorate([
+        $mol_mem
+    ], $azero_app_api.prototype, "filters", null);
+    __decorate([
+        $mol_mem
+    ], $azero_app_api.prototype, "results_response", null);
+    __decorate([
+        $mol_mem
+    ], $azero_app_api.prototype, "selectize_params", null);
+    __decorate([
+        $mol_mem
+    ], $azero_app_api.prototype, "selectize", null);
+    __decorate([
+        $mol_mem
+    ], $azero_app_api.prototype, "results", null);
+    $.$azero_app_api = $azero_app_api;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_store extends $mol_object2 {
+        data_default;
+        constructor(data_default) {
+            super();
+            this.data_default = data_default;
+        }
+        data(next) {
+            return next === undefined ? this.data_default : next;
+        }
+        snapshot(next) {
+            return JSON.stringify(this.data(next === undefined ? next : JSON.parse(next)));
+        }
+        value(key, next) {
+            const data = this.data();
+            if (next === undefined)
+                return data && data[key];
+            const Constr = Reflect.getPrototypeOf(data).constructor;
+            this.data(Object.assign(new Constr, data, { [key]: next }));
+            return next;
+        }
+        selection(key, next = [0, 0]) {
+            return next;
+        }
+        sub(key, lens) {
+            if (!lens)
+                lens = new $mol_store();
+            const data = lens.data;
+            lens.data = next => {
+                if (next == undefined) {
+                    return this.value(key) ?? lens.data_default;
+                }
+                return this.value(key, next);
+            };
+            return lens;
+        }
+        reset() {
+            this.data(this.data_default);
+        }
+        active() {
+            return true;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_store.prototype, "data", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_store.prototype, "selection", null);
+    $.$mol_store = $mol_store;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $azero_app_api_entity extends $mol_store {
+        cdn_uri() {
+            return 'https://mpds.io';
+        }
+        api_uri() {
+            return 'https://api.mpds.io/v0';
+        }
+        id() {
+            return this.value(0);
+        }
+        id_prefix() {
+            return this.value(0).split('-')[0];
+        }
+        type() {
+            return this.id()[0];
+        }
+        formula_html() {
+            return this.value(1);
+        }
+        property() {
+            return this.value(2);
+        }
+        data_type() {
+            if (this.value(3) === 7)
+                return 'ml_data';
+            if ([8, 9, 10, 11].includes(this.value(3)))
+                return 'ab_data';
+            return '';
+        }
+        is_public() {
+            return this.value(4);
+        }
+        bib_id() {
+            return this.ref_id() === 999999 ? 0 : this.value(5);
+        }
+        year() {
+            return this.value(6);
+        }
+        ref_id() {
+            return this.value(7);
+        }
+        thumbs_link() {
+            if (this.type() === 'P')
+                return '';
+            return `${this.cdn_uri()}/${this.type() === 'C' ? `pd_thumbs/${this.id_prefix()}` : 'rd_thumbs'}/.png`;
+        }
+        ref_link() {
+            if (this.type() !== 'P')
+                return '';
+            return `${this.api_uri()}/download/bib?ref_id=${this.ref_id()}&sid=&fmt=bib`;
+        }
+        pdf_link() {
+            if (this.type() !== 'P')
+                return '';
+            return `${this.api_uri()}/download/${this.type().toLowerCase()}?q=${this.id_prefix()}&sid=&fmt=pdf`;
+        }
+        png_link() {
+            if (this.type() === 'P')
+                return '';
+            return `${this.api_uri()}/download/${this.type().toLowerCase()}?q=${this.id_prefix()}&sid=&fmt=png`;
+        }
+        gif_link() {
+            if (this.type() !== 'S')
+                return '';
+            return `${this.api_uri()}/download/${this.type().toLowerCase()}?q=${this.id_prefix()}&fmt=gif`;
+        }
+    }
+    $.$azero_app_api_entity = $azero_app_api_entity;
+})($ || ($ = {}));
+
+;
+	($.$azero_app_search) = class $azero_app_search extends ($.$mol_book2) {
+		clear_search_filter(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		search_labeler_title(id){
+			return "Chemical formulae";
+		}
+		search_labeler_content(id){
+			return "Формула";
+		}
+		Search_labeler_content(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.search_labeler_content(id)));
+			return obj;
+		}
+		Search_labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.search_labeler_title(id)));
+			(obj.content) = () => ([(this.Search_labeler_content(id))]);
+			return obj;
+		}
+		Search_filter(id){
+			const obj = new this.$.$mol_button_major();
+			(obj.hint) = () => ("Убрать");
+			(obj.click) = (next) => ((this.clear_search_filter(id, next)));
+			(obj.sub) = () => ([(this.Search_labeler(id))]);
+			return obj;
+		}
+		search_filters(){
+			return [(this.Search_filter("0"))];
+		}
+		Search_filters(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ((this.search_filters()));
+			return obj;
+		}
+		refinement_filters_title(id){
+			return "qwe";
+		}
+		Filter_button(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.refinement_filters_title(id)));
+			return obj;
+		}
+		refinement_filter_list(){
+			return [(this.Filter_button("0"))];
+		}
+		Filters(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.refinement_filter_list()));
+			return obj;
+		}
+		Filters_page(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("Фильтры");
+			(obj.body) = () => ([(this.Search_filters()), (this.Filters())]);
+			return obj;
+		}
+		search(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		suggests(){
+			return [];
+		}
+		Search(){
+			const obj = new this.$.$mol_search();
+			(obj.hint) = () => ("Type property, elements, classes");
+			(obj.query) = (next) => ((this.search(next)));
+			(obj.suggests) = () => ((this.suggests()));
+			return obj;
+		}
+		fetch_search(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Search_button(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ("Искать");
+			(obj.click) = (next) => ((this.fetch_search(next)));
+			return obj;
+		}
+		Search_row(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.Search()), (this.Search_button())]);
+			return obj;
+		}
+		search_type(next){
+			if(next !== undefined) return next;
+			return "0";
+		}
+		View_type_switch(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.search_type(next)));
+			(obj.options) = () => ({
+				"0": "entires", 
+				"1": "phases", 
+				"2": "articles"
+			});
+			return obj;
+		}
+		View_type_row(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.View_type_switch())]);
+			return obj;
+		}
+		get_image(id){
+			return "";
+		}
+		Image(id){
+			const obj = new this.$.$mol_image();
+			(obj.uri) = () => ((this.get_image(id)));
+			return obj;
+		}
+		get_classes(id){
+			return "";
+		}
+		Classes(id){
+			const obj = new this.$.$mol_html_view();
+			(obj.html) = () => ((this.get_classes(id)));
+			return obj;
+		}
+		get_description(id){
+			return "";
+		}
+		Description(id){
+			const obj = new this.$.$mol_html_view();
+			(obj.html) = () => ((this.get_description(id)));
+			return obj;
+		}
+		Facet_info(id){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([(this.Classes(id)), (this.Description(id))]);
+			return obj;
+		}
+		Card(id){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.Image(id)), (this.Facet_info(id))]);
+			return obj;
+		}
+		card_list(){
+			return [(this.Card("0"))];
+		}
+		Row_cards(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.card_list()));
+			return obj;
+		}
+		Result_page(){
+			const obj = new this.$.$mol_page();
+			(obj.title) = () => ("Поиск");
+			(obj.Title) = () => (null);
+			(obj.tools) = () => ([(this.Search_row()), (this.View_type_row())]);
+			(obj.body) = () => ([(this.Row_cards())]);
+			return obj;
+		}
+		menu_title(){
+			return "Поиск";
+		}
+		parsed_query(){
+			return null;
+		}
+		mpds_api(){
+			const obj = new this.$.$azero_app_api();
+			(obj.search_params) = () => ((this.parsed_query()));
+			(obj.selectize_params) = (next) => ((this.search()));
+			return obj;
+		}
+		pages(){
+			return [(this.Filters_page()), (this.Result_page())];
+		}
+	};
+	($mol_mem_key(($.$azero_app_search.prototype), "clear_search_filter"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Search_labeler_content"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Search_labeler"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Search_filter"));
+	($mol_mem(($.$azero_app_search.prototype), "Search_filters"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Filter_button"));
+	($mol_mem(($.$azero_app_search.prototype), "Filters"));
+	($mol_mem(($.$azero_app_search.prototype), "Filters_page"));
+	($mol_mem(($.$azero_app_search.prototype), "search"));
+	($mol_mem(($.$azero_app_search.prototype), "Search"));
+	($mol_mem(($.$azero_app_search.prototype), "fetch_search"));
+	($mol_mem(($.$azero_app_search.prototype), "Search_button"));
+	($mol_mem(($.$azero_app_search.prototype), "Search_row"));
+	($mol_mem(($.$azero_app_search.prototype), "search_type"));
+	($mol_mem(($.$azero_app_search.prototype), "View_type_switch"));
+	($mol_mem(($.$azero_app_search.prototype), "View_type_row"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Image"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Classes"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Description"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Facet_info"));
+	($mol_mem_key(($.$azero_app_search.prototype), "Card"));
+	($mol_mem(($.$azero_app_search.prototype), "Row_cards"));
+	($mol_mem(($.$azero_app_search.prototype), "Result_page"));
+	($mol_mem(($.$azero_app_search.prototype), "mpds_api"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_import extends $mol_object2 {
+        static module(uri) {
+            $mol_wire_solid();
+            return $mol_wire_sync(this).module_async(uri);
+        }
+        static module_async(uri) {
+            return import(uri);
+        }
+        static script(uri) {
+            $mol_wire_solid();
+            return $mol_wire_sync(this).script_async(uri);
+        }
+        static script_async(uri) {
+            const doc = $mol_dom_context.document;
+            const script = doc.createElement('script');
+            script.src = uri;
+            doc.head.appendChild(script);
+            return new Promise((done, fail) => {
+                script.onload = () => done($mol_dom_context);
+                script.onerror = () => fail(new Error(`Can not import ${uri}`));
+            });
+        }
+        static style(uri) {
+            return $mol_wire_sync(this).style_async(uri);
+        }
+        static style_async(uri) {
+            const doc = $mol_dom_context.document;
+            const style = doc.createElement('link');
+            style.rel = 'stylesheet';
+            style.href = uri;
+            doc.head.appendChild(style);
+            return new Promise((done, fail) => {
+                style.onload = () => done(style.sheet);
+                style.onerror = () => fail(new Error(`Can not import ${uri}`));
+            });
+        }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $mol_import, "module", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_import, "script", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_import, "style", null);
+    $.$mol_import = $mol_import;
+})($ || ($ = {}));
+
+;
+"use strict";
 
 ;
 "use strict";
@@ -8878,31 +9368,25 @@ var $;
     var $$;
     (function ($$) {
         class $azero_app_search extends $.$azero_app_search {
-            dumb_query(next) {
-                return (next ?? {
-                    classes: 'zeolite',
-                    lattices: 'orthorhombic',
-                    elements: 'Al',
-                    search_type: +this.search_type(),
-                });
-            }
-            fetch_refinement(next) {
-                const query = this.dumb_query();
-                const urlRefinement = 'https://api.mpds.io/v0/search/refinement?q=';
-                return $mol_fetch.json(urlRefinement + JSON.stringify(query));
-            }
-            refinement_data() {
-                return this.fetch_refinement().payload;
+            optimade_nlp() {
+                return $mol_import.script('https://unpkg.com/optimade-mpds-nlp@0.1.7/index.js').OptimadeNLP();
             }
             refinement_filter_list() {
-                return this.refinement_data().map((_, index) => this.Filter_button(index));
+                return this.mpds_api().filters()?.payload?.map((_, index) => this.Filter_button(index)) || [];
+            }
+            parsed_query_row(next) {
+                return $mol_state_arg.value('q', next ? JSON.stringify(this.optimade_nlp().guess(next)) : null) ?? '';
+            }
+            parsed_query() {
+                return JSON.parse(this.parsed_query_row() || '{}');
             }
             refinement_filters_title(id) {
-                const { facet, value, count } = this.refinement_data()[id];
-                return facet + ' ' + count + ':' + value;
+                const data = this.mpds_api()?.filters()?.payload?.[id];
+                return data?.facet + ' ' + data?.count + ':' + data?.value;
             }
             filters_query() {
-                return Object.entries(this.dumb_query()) || [];
+                console.log(this.parsed_query());
+                return Object.entries(this.parsed_query()) || [];
             }
             search_filters() {
                 return this.filters_query().map(([filter, value]) => this.Search_filter(filter));
@@ -8911,70 +9395,44 @@ var $;
                 return id;
             }
             search_labeler_content(id) {
-                return this.dumb_query()[id];
+                return this.parsed_query()[id];
             }
             clear_search_filter(id, next) {
-                const new_query = { ...this.dumb_query() };
+                console.log('clear_search_filter', id);
+                const new_query = { ...this.parsed_query() };
                 delete new_query[id];
-                this.dumb_query(new_query);
-            }
-            fetch_facet(next) {
-                const query = this.dumb_query();
-                const urlFacet = 'https://api.mpds.io/v0/search/facet?q=';
-                return $mol_fetch.json(urlFacet + JSON.stringify(query));
+                this.parsed_query_row(new_query);
             }
             fetch_search() {
-                if (this.search()) {
-                    this.fetch_refinement();
-                    this.fetch_facet();
-                }
-            }
-            fetch_suggests() {
-                if (this.search()) {
-                    this.$.$mol_wait_timeout(1000);
-                    console.log('debounce');
-                    const url = 'https://api.mpds.io/v0/search/selectize?q=';
-                    const query = this.search();
-                    $mol_fetch.json(url + query);
-                    return $mol_fetch.json(url + query);
-                }
+                console.log('отправить запрос');
+                this.parsed_query_row(this.search());
             }
             suggests() {
-                if (this.search()) {
-                    const data = this.fetch_suggests();
-                    return data?.flatMap(d => d.label) || [];
-                }
-                return [];
+                const data = this.mpds_api().selectize();
+                console.log('suggets data', data);
+                return data?.flatMap(d => d.label) || [];
             }
             card_list() {
-                if (!this.fetch_facet().out)
+                if (!this.mpds_api().results())
                     return [];
-                return this.fetch_facet()?.out?.map((card, index) => this.Card(index));
+                return this.mpds_api().results()?.map((card, index) => this.Card(index)) || [];
             }
             get_classes(id) {
-                return `<div>${this.fetch_facet()?.out?.[id]?.[1]}</div>`;
+                return `<div>${this.mpds_api().results()?.[id].formula_html()}</div>`;
             }
             get_description(id) {
-                return `<div>${this.fetch_facet()?.out?.[id]?.[2]}</div>`;
+                return `<div>${this.mpds_api().results()?.[id]?.property()}</div>`;
             }
             get_image(id) {
-                const image_name = this.fetch_facet()?.out?.[id]?.[0];
-                const category = image_name.startsWith('C') ? 'pd' : 'rd';
-                return `https://mpds.io/${category}_thumbs/${image_name}.png`;
+                return this.mpds_api()?.results()?.[id]?.thumbs_link() || '';
             }
         }
         __decorate([
             $mol_mem
-        ], $azero_app_search.prototype, "dumb_query", null);
-        __decorate([
-            $mol_action
-        ], $azero_app_search.prototype, "fetch_refinement", null);
+        ], $azero_app_search.prototype, "optimade_nlp", null);
         __decorate([
             $mol_mem
-        ], $azero_app_search.prototype, "refinement_data", null);
-        __decorate([
-            $mol_mem
-        ], $azero_app_search.prototype, "fetch_facet", null);
+        ], $azero_app_search.prototype, "parsed_query_row", null);
         __decorate([
             $mol_mem
         ], $azero_app_search.prototype, "get_image", null);
@@ -12621,6 +13079,351 @@ var $;
             $mol_assert_equal($mol_state_session.value(key), '$mol_state_session_test');
             $mol_state_session.value(key, null);
             $mol_assert_equal($mol_state_session.value(key), null);
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'config by value'() {
+            const N = $mol_data_setup((a) => a, 5);
+            $mol_assert_equal(N.config, 5);
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'Is number'() {
+            $mol_data_number(0);
+        },
+        'Is not number'() {
+            $mol_assert_fail(() => {
+                $mol_data_number('x');
+            }, 'x is not a number');
+        },
+        'Is object number'() {
+            $mol_assert_fail(() => {
+                $mol_data_number(new Number(''));
+            }, '0 is not a number');
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'Is string'() {
+            $mol_data_string('');
+        },
+        'Is not string'() {
+            $mol_assert_fail(() => {
+                $mol_data_string(0);
+            }, '0 is not a string');
+        },
+        'Is object string'() {
+            $mol_assert_fail(() => {
+                $mol_data_string(new String('x'));
+            }, 'x is not a string');
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'Fit to record'() {
+            const User = $mol_data_record({ age: $mol_data_number });
+            User({ age: 0 });
+        },
+        'Extends record'() {
+            const User = $mol_data_record({ age: $mol_data_number });
+            User({ age: 0, name: 'Jin' });
+        },
+        'Shrinks record'() {
+            $mol_assert_fail(() => {
+                const User = $mol_data_record({ age: $mol_data_number, name: $mol_data_string });
+                User({ age: 0 });
+            }, '["name"] undefined is not a string');
+        },
+        'Shrinks deep record'() {
+            $mol_assert_fail(() => {
+                const User = $mol_data_record({ wife: $mol_data_record({ age: $mol_data_number }) });
+                User({ wife: {} });
+            }, '["wife"] ["age"] undefined is not a number');
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    const Age = $mol_data_optional($mol_data_number);
+    const Age_or_zero = $mol_data_optional($mol_data_number, () => 0);
+    $mol_test({
+        'Is not present'() {
+            $mol_assert_equal(Age(undefined), undefined);
+        },
+        'Is present'() {
+            $mol_assert_equal(Age(0), 0);
+        },
+        'Fallbacked'() {
+            $mol_assert_equal(Age_or_zero(undefined), 0);
+        },
+        'Is null'() {
+            $mol_assert_fail(() => Age(null), 'null is not a number');
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'Is first'() {
+            $mol_data_variant($mol_data_number, $mol_data_string)(0);
+        },
+        'Is second'() {
+            $mol_data_variant($mol_data_number, $mol_data_string)('');
+        },
+        'Is false'() {
+            $mol_assert_fail(() => {
+                $mol_data_variant($mol_data_number, $mol_data_string)(false);
+            }, 'false is not any of variants');
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'Is null'() {
+            $mol_data_nullable($mol_data_number)(null);
+        },
+        'Is not null'() {
+            $mol_data_nullable($mol_data_number)(0);
+        },
+        'Is undefined'() {
+            $mol_assert_fail(() => {
+                const Type = $mol_data_nullable($mol_data_number);
+                Type(undefined);
+            }, 'undefined is not a number');
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'Is empty array'() {
+            $mol_data_array($mol_data_number)([]);
+        },
+        'Is array'() {
+            $mol_data_array($mol_data_number)([1, 2]);
+        },
+        'Is not array'() {
+            $mol_assert_fail(() => {
+                $mol_data_array($mol_data_number)({ [0]: 1, length: 1, map: () => { } });
+            }, '[object Object] is not an array');
+        },
+        'Has wrong item'() {
+            $mol_assert_fail(() => {
+                $mol_data_array($mol_data_number)([1, '1']);
+            }, '[1] 1 is not a number');
+        },
+        'Has wrong deep item'() {
+            $mol_assert_fail(() => {
+                $mol_data_array($mol_data_array($mol_data_number))([[], [0, 0, false]]);
+            }, '[1] [2] false is not a number');
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'Is integer'() {
+            $mol_data_integer(0);
+        },
+        'Is float'() {
+            $mol_assert_fail(() => {
+                $mol_data_integer(1.1);
+            }, '1.1 is not an integer');
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'is same number'() {
+            const Nan = $mol_data_const(Number.NaN);
+            Nan(Number.NaN);
+        },
+        'is equal object'() {
+            const Tags = $mol_data_const({ tags: ['deep', 'equals'] });
+            Tags({ tags: ['deep', 'equals'] });
+        },
+        'is different number'() {
+            const Five = $mol_data_const(5);
+            $mol_assert_fail(() => Five(6), '6 is not 5');
+        },
+        'is different object'() {
+            const Tags = $mol_data_const({ tags: ['deep', 'equals'] });
+            $mol_assert_fail(() => Tags({ tags: ['shallow', 'equals'] }), `{"tags":["shallow","equals"]} is not {"tags":["deep","equals"]}`);
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'Is boolean - true'() {
+            $mol_data_boolean(true);
+        },
+        'Is boolean - false'() {
+            $mol_data_boolean(false);
+        },
+        'Is not boolean'() {
+            $mol_assert_fail(() => {
+                $mol_data_boolean('x');
+            }, 'x is not a boolean');
+        },
+        'Is object boolean'() {
+            $mol_assert_fail(() => {
+                $mol_data_boolean(new Boolean(''));
+            }, 'false is not a boolean');
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'default data'() {
+            const store = new $mol_store({
+                foo: 1,
+                bar: 2,
+            });
+            $mol_assert_equal(store.data().foo, 1);
+            $mol_assert_equal(store.data().bar, 2);
+        },
+        'get and set by shapshot'() {
+            const store = new $mol_store({
+                foo: 1,
+                bar: 2,
+            });
+            $mol_assert_equal(store.snapshot(), '{"foo":1,"bar":2}');
+            store.snapshot('{"foo":2,"bar":1}');
+            $mol_assert_equal(store.data().foo, 2);
+            $mol_assert_equal(store.data().bar, 1);
+        },
+        'get and set by key'() {
+            const store = new $mol_store({
+                foo: 1,
+            });
+            $mol_assert_equal(store.value('foo'), 1);
+            store.value('foo', 2);
+            $mol_assert_equal(store.value('foo'), 2);
+        },
+        'get and set by lens'() {
+            const store = new $mol_store({
+                foo: 1,
+            });
+            const lens = store.sub('foo');
+            $mol_assert_equal(lens.data(), 1);
+            lens.data(2);
+            $mol_assert_equal(lens.data(), 2);
+        },
+        'views and actions'() {
+            const Person = class extends $mol_store {
+                get full_name() {
+                    const name = this.value('name');
+                    return name.first + ' ' + name.last;
+                }
+                swap_names() {
+                    const name = this.value('name');
+                    this.value('name', {
+                        first: name.last,
+                        last: name.first,
+                    });
+                }
+            };
+            const store = new Person({
+                name: {
+                    first: 'Foo',
+                    last: 'Bar',
+                },
+            });
+            $mol_assert_equal(store.full_name, 'Foo Bar');
+            store.swap_names();
+            $mol_assert_equal(store.full_name, 'Bar Foo');
+        },
+        'nested views and actions'() {
+            class Person extends $mol_store {
+                get full_name() {
+                    const name = this.value('name');
+                    return name.first + ' ' + name.last;
+                }
+                swap_names() {
+                    const name = this.value('name');
+                    this.value('name', {
+                        first: name.last,
+                        last: name.first,
+                    });
+                }
+            }
+            class Band extends $mol_store {
+                get members() {
+                    const lens = this.sub('members');
+                    return new Proxy({}, {
+                        get: (_, id) => lens.sub(id, new Person),
+                    });
+                }
+            }
+            const band = new Band({
+                name: 'Dream Team',
+                members: {
+                    foo: {
+                        name: {
+                            first: 'Foo',
+                            last: 'Bar',
+                        },
+                    }
+                }
+            });
+            const person = band.members['foo'];
+            $mol_assert_equal(person.full_name, 'Foo Bar');
+            person.swap_names();
+            $mol_assert_equal(band.data().members['foo'].name.first, 'Bar');
+            $mol_assert_equal(band.data().members['foo'].name.last, 'Foo');
         },
     });
 })($ || ($ = {}));
