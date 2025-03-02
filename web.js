@@ -8269,14 +8269,14 @@ var $;
         id: Maybe(Str),
     }));
     $.$optimade_zero_api_entry = Rec({
-        0: Str,
+        0: Vary(Str, Int),
         1: Str,
-        2: Str,
-        3: Int,
-        4: Bool,
-        5: Str,
-        6: Int,
-        7: Int,
+        2: Vary(Str, Int),
+        3: Vary(Str, Int),
+        4: Vary(Bool, Int),
+        5: Maybe(Str),
+        6: Maybe(Int),
+        7: Maybe(Int),
     });
     const Facet_response = Rec({
         error: Nully(Str),
@@ -8401,10 +8401,10 @@ var $;
             return this.value(0);
         }
         id_prefix() {
-            return this.value(0).split('-')[0];
+            return this.value(0)?.split('-')?.[0];
         }
         type() {
-            return this.id()[0];
+            return this.id()?.[0] || '';
         }
         formula_html() {
             return this.value(1);
@@ -8748,11 +8748,13 @@ var $;
                 return $mol_state_arg.value('q', next ? JSON.stringify($optimade_mpds_nlp.guess(next)) : null) ?? '';
             }
             parsed_query() {
-                return JSON.parse(this.parsed_query_row() || '{}');
+                const query = JSON.parse(this.parsed_query_row() || '{}');
+                query.search_type = +this.search_type();
+                return query;
             }
             refinement_filters_title(id) {
                 const data = this.mpds_api()?.filters()?.payload?.[id];
-                return data?.facet + ' ' + data?.count + ':' + data?.value;
+                return data?.facet + ' ' + data?.count + ': ' + data?.value;
             }
             filters_query() {
                 return Object.entries(this.parsed_query()) || [];

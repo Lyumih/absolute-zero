@@ -3146,43 +3146,73 @@ declare namespace $ {
 
 declare namespace $ {
     const $optimade_zero_api_entry: ((val: {
-        0: string;
+        5?: string | undefined;
+        6?: number | undefined;
+        7?: number | undefined;
+        0: string | number;
         1: string;
-        2: string;
-        3: number;
-        4: boolean;
-        5: string;
-        6: number;
-        7: number;
+        2: string | number;
+        3: string | number;
+        4: number | boolean;
     }) => Readonly<{
-        0: string;
+        5?: string | undefined;
+        6?: number | undefined;
+        7?: number | undefined;
+        0: string | number;
         1: string;
-        2: string;
-        3: number;
-        4: boolean;
-        5: string;
-        6: number;
-        7: number;
+        2: string | number;
+        3: string | number;
+        4: number | boolean;
     }>) & {
         config: {
-            0: (val: string) => string;
+            0: ((val: string | number) => string | number) & {
+                config: [(val: string) => string, typeof $mol_data_integer];
+                Value: string | number;
+            };
             1: (val: string) => string;
-            2: (val: string) => string;
-            3: typeof $mol_data_integer;
-            4: (val: boolean) => boolean;
-            5: (val: string) => string;
-            6: typeof $mol_data_integer;
-            7: typeof $mol_data_integer;
+            2: ((val: string | number) => string | number) & {
+                config: [(val: string) => string, typeof $mol_data_integer];
+                Value: string | number;
+            };
+            3: ((val: string | number) => string | number) & {
+                config: [(val: string) => string, typeof $mol_data_integer];
+                Value: string | number;
+            };
+            4: ((val: number | boolean) => number | boolean) & {
+                config: [(val: boolean) => boolean, typeof $mol_data_integer];
+                Value: number | boolean;
+            };
+            5: ((val: string | undefined) => string | undefined) & {
+                config: {
+                    sub: (val: string) => string;
+                    fallback: (() => string) | undefined;
+                };
+                Value: string | undefined;
+            };
+            6: ((val: number | undefined) => number | undefined) & {
+                config: {
+                    sub: typeof $mol_data_integer;
+                    fallback: (() => number) | undefined;
+                };
+                Value: number | undefined;
+            };
+            7: ((val: number | undefined) => number | undefined) & {
+                config: {
+                    sub: typeof $mol_data_integer;
+                    fallback: (() => number) | undefined;
+                };
+                Value: number | undefined;
+            };
         };
         Value: Readonly<{
-            0: string;
+            5?: string | undefined;
+            6?: number | undefined;
+            7?: number | undefined;
+            0: string | number;
             1: string;
-            2: string;
-            3: number;
-            4: boolean;
-            5: string;
-            6: number;
-            7: number;
+            2: string | number;
+            3: string | number;
+            4: number | boolean;
         }>;
     };
     class $optimade_zero_api extends $mol_object {
@@ -3218,14 +3248,14 @@ declare namespace $ {
             notice?: string | undefined;
             estimated_count?: number | undefined;
             out?: readonly Readonly<{
-                0: string;
+                5?: string | undefined;
+                6?: number | undefined;
+                7?: number | undefined;
+                0: string | number;
                 1: string;
-                2: string;
-                3: number;
-                4: boolean;
-                5: string;
-                6: number;
-                7: number;
+                2: string | number;
+                3: string | number;
+                4: number | boolean;
             }>[] | undefined;
             error: string | null;
         }>;
@@ -3251,13 +3281,13 @@ declare namespace $ {
     class $optimade_zero_api_entity extends $mol_store<typeof $optimade_zero_api_entry.Value> {
         cdn_uri(): string;
         api_uri(): string;
-        id(): string;
+        id(): string | number;
         id_prefix(): string;
         type(): string;
         formula_html(): string;
-        property(): string;
+        property(): string | number;
         data_type(): "" | "ml_data" | "ab_data";
-        is_public(): boolean;
+        is_public(): number | boolean;
         bib_id(): string | 0;
         year(): number;
         ref_id(): number;
